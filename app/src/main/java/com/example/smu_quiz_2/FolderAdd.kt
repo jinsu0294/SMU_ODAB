@@ -3,12 +3,11 @@ package com.example.smu_quiz_2
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.support.v7.app.AppCompatActivity
+
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.folder_add.*
-import kotlinx.android.synthetic.main.signin.*
 
 class FolderAdd:AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {

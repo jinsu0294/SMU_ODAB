@@ -3,14 +3,17 @@ package com.example.smu_quiz_2
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.example.smu_quiz_2.adapter.FolderAdapter
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.userfolder.*
 
 class UserFolder : AppCompatActivity(){
+
+    private lateinit var auth: FirebaseAuth
 
     fun checkFolder(){
         // 폴더가 없는 경우
@@ -39,12 +42,12 @@ class UserFolder : AppCompatActivity(){
         rvFolderRecyclerview.adapter = mAdapter
 
         // 레아아웃 매니저 절성
-        val lm = LinearLayoutManager(this)
+        val lm = androidx.recyclerview.widget.LinearLayoutManager(this)
         rvFolderRecyclerview.layoutManager = lm
         rvFolderRecyclerview.setHasFixedSize(true)
 
-        val result = user.getId()
-        tvId.text = "User: ${result}"
+        auth = FirebaseAuth.getInstance()
+        tvId.text = auth.currentUser?.email
 
         // result code를 RESULT_OK로 설정(Singin Activity finish() 하려고
         setResult(Activity.RESULT_OK)
@@ -55,6 +58,17 @@ class UserFolder : AppCompatActivity(){
         btnAdd.setOnClickListener {
             val intent = Intent(this,FolderAdd::class.java)
             startActivityForResult(intent,102)
+        }
+        //logout
+        btnLogout.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+        }
+        ////go home
+        ibtnhome.setOnClickListener {
+            val intent = Intent(this,UserFolder::class.java)
+            startActivity(intent)
         }
 
     }

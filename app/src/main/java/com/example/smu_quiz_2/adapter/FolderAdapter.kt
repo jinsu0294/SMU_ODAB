@@ -2,7 +2,7 @@ package com.example.smu_quiz_2.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +14,10 @@ import com.example.smu_quiz_2.QuizFolder
 import com.example.smu_quiz_2.R
 
 
-class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): RecyclerView.Adapter<FolderAdapter.Holder>(){
+class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): androidx.recyclerview.widget.RecyclerView.Adapter<FolderAdapter.Holder>(){
 
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.folder_item, parent,false)
         return Holder(view)
     }
@@ -25,11 +25,11 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): Re
     override fun getItemCount(): Int {
         return folderList.size
     }
-    override fun onBindViewHolder(holder: Holder?, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(folderList[position], context)
     }
 
-    class Holder(itemView: View):RecyclerView.ViewHolder(itemView) {
+    class Holder(itemView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
         fun bind(folderList: Folder, context:Context){
             val folderName = itemView.findViewById<TextView>(R.id.tvFolderName)
             val odab=itemView.findViewById<Button>(R.id.btnOdab)

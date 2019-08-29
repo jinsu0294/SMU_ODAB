@@ -9,7 +9,7 @@
         android:focusableInTouchMode="true"
         android:background="@color/lightPurple"
 >
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/lightPurple"
@@ -239,5 +239,5 @@
                 android:paddingLeft="@dimen/edit_padding_left"
                 android:textSize="@dimen/edit_text_size"
         />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
