@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+
         btnlogin.setOnClickListener {
             signInWithGoogle()
 
@@ -68,24 +69,17 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithCredential:success")
                     val intent = Intent(this,UserFolder::class.java)
                     startActivity(intent)
-
+                    finish()
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-
                 }
-
             }
     }
     private fun signInWithGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
-    private fun signOut() {
-        auth.signOut()
-        googleSignInClient.signOut().addOnCompleteListener(this) {
 
-        }
-    }
     companion object {
         private const val TAG = "TAG"
         private const val RC_SIGN_IN = 9001
