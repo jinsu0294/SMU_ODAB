@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/lightPurple"
+>
+    <Button
+            android:id="@+id/btnAllCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/text_box_height"
+            android:textSize="@dimen/button_text_size"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/darkPurple"
+            android:text="@string/all_check"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/rvQuizRecyclerView"
+            android:layout_marginTop="@dimen/margin10"
+
+    />
+    <!-- 상부 -->
+    <TextView
+            android:id="@+id/tvNothing"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/folder_item_height"
+            android:text="@string/nothing"
+            android:background="@color/darkPurple"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/margin10"
+            android:layout_marginRight="@dimen/margin10"
+            android:layout_marginLeft="@dimen/margin10"
+    />
+
+    <!-- 중부 -->
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvQuizRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/btnAllCheck"
+            app:layout_constraintBottom_toTopOf="@id/linearLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginRight="@dimen/margin10"
+            android:layout_marginBottom="@dimen/margin10"
+
+    >
+
+    </android.support.v7.widget.RecyclerView>
+    <!-- 하부 -->
+    <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="@dimen/margin10"
+    >
+        <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/darkPurple"
+                android:text="@string/add"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size"
+        />
+        <Button
+                android:id="@+id/btnSolve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/button_text_size"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/darkPurple"
+                android:text="@string/solve"
+        />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

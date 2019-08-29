@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="mainColor">#DEF08080</color>
+    <color name="mainWhite">#ffffff</color>
+    <color name="mainGrey">#D5D4D4</color>
+    <color name="mainBlack">#000000</color>
+
+    <color name="background">#66000000</color>
+
+    <!-- 순서대로 [진보라, 연보라, 흰색, 검은색, 회색, 투명] -->
+    <color name="darkPurple">#8977AD</color>
+    <color name="lightPurple">#ddc6e7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grey">#A5A4A4</color>
+
+
+
+</resources>

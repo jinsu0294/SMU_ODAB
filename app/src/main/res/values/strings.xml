@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">SMU_Quiz_2</string>
+    <string name="user">USER: </string>
+    <string name="logout">Logout</string>
+    <string name="add">추가</string>
+
+    <string name="tile">Title</string>
+    <string name="ok">OK</string>
+    <string name="text">Text</string>
+    <string name="save">저장</string>
+    <string name="quiz">문제</string>
+    <string name="choice">보기</string>
+    <string name="explanation">해설</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="answer">답</string>
+
+    <string name="odab">오답노트</string>
+    <string name="solveQuiz">문제풀기</string>
+    <string name="solve">풀기</string>
+    <string name="all_check">전체선택</string>
+
+    <string name="et_hint">여기에 입력하세요.</string>
+    <string name="et_hint_int">여기에 입력하세요(숫자만 ex. 1)</string>
+
+    <string name="error">통신상태가 좋지 않습니다.</string>
+
+    <string name="nothing">입력값이 없습니다.</string>
+
+    <string name="need_permission">사진 및 파일을 저장하기 위하여 권한이 필요합니다.</string>
+    <string name="way_permission">[설정] -> [권한] 에서 권한을 허용할 수 있습니다.</string>
+
+    <string name="take_picture">촬영하기</string>
+    <string name="get_picture">가져오기</string>
+    
+</resources>

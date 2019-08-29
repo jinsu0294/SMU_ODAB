@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+
+    <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/folder_small_width"
+            android:layout_height="@dimen/folder_small_height"
+            android:background="@drawable/round_top_fill"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="@dimen/margin30"
+            android:layout_marginTop="@dimen/margin10"
+    />
+    <TextView
+            android:id="@+id/tvFolderName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/folder_item_height"
+            android:text="folder name"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/margin10"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/title_text_size"
+            android:background="@drawable/round_fill"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginRight="@dimen/margin10"
+    />
+
+    <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/tvFolderName"
+            app:layout_constraintBottom_toBottomOf="@id/tvFolderName"
+            app:layout_constraintRight_toRightOf="@id/tvFolderName"
+            android:layout_marginRight="@dimen/margin10"
+    >
+        <Button
+                android:id="@+id/btnOdab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/button_text_size"
+                android:textColor="@color/darkPurple"
+                android:backgroundTint="@color/white"
+                android:text="@string/odab"
+
+        />
+        <Button
+                android:id="@+id/btnQuiz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/button_text_size"
+                android:textColor="@color/darkPurple"
+                android:backgroundTint="@color/white"
+                android:text="@string/solveQuiz"
+
+        />
+
+    </LinearLayout>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
