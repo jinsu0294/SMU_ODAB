@@ -2,7 +2,7 @@ package com.example.smu_quiz_2
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.smu_quiz_2.adapter.QuizFolderAdapter
 import kotlinx.android.synthetic.main.quiz_detail.*
 

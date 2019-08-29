@@ -3,8 +3,8 @@ package com.example.smu_quiz_2
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.example.smu_quiz_2.adapter.OdabFolderAdapter
@@ -45,7 +45,7 @@ class OdabFolder:AppCompatActivity(){
         rvFolderRecyclerview.adapter = mAdapter
 
         // 레아아웃 매니저 설정
-        val lm = LinearLayoutManager(this)
+        val lm = androidx.recyclerview.widget.LinearLayoutManager(this)
         rvFolderRecyclerview.layoutManager = lm
         rvFolderRecyclerview.setHasFixedSize(true)
 
