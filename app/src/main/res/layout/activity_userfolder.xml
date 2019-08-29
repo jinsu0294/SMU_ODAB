@@ -21,16 +21,6 @@
             app:layout_constraintTop_toTopOf="parent"
     />
 
-    <ImageButton
-            android:id="@+id/ibtnhome"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/home"
-    />
-
     <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
@@ -48,11 +38,11 @@
     <TextView
             android:id="@+id/tvNothing"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/folder_item_height"
             android:background="@drawable/round_fill"
             android:text="@string/nothing"
             android:textColor="@color/white"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:padding="@dimen/margin10"
             app:layout_constraintTop_toBottomOf="@id/btnLogout"
             app:layout_constraintRight_toRightOf="parent"
@@ -66,14 +56,13 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFolderRecyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/btnAdd"
             app:layout_constraintTop_toBottomOf="@id/btnLogout"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="@dimen/margin10"
             android:layout_marginLeft="@dimen/margin10"
-            android:layout_marginTop="@dimen/margin50"
     >
 
     </androidx.recyclerview.widget.RecyclerView>

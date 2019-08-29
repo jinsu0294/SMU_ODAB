@@ -4,15 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.example.smu_quiz_2.adapter.FolderAdapter
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.userfolder.*
+import kotlinx.android.synthetic.main.activity_userfolder.*
 
-class UserFolder : AppCompatActivity(){
+class UserFolderActivity : AppCompatActivity(){
 
     private lateinit var auth: FirebaseAuth
 
@@ -32,7 +30,7 @@ class UserFolder : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.userfolder)
+        setContentView(R.layout.activity_userfolder)
 
         //로그인 되어있는지 확인
         auth = FirebaseAuth.getInstance()
@@ -65,7 +63,7 @@ class UserFolder : AppCompatActivity(){
 
         // 추가 버튼 리스너
         btnAdd.setOnClickListener {
-            val intent = Intent(this,FolderAdd::class.java)
+            val intent = Intent(this,FolderAddActivity::class.java)
             startActivityForResult(intent,102)
         }
         //logout
@@ -74,11 +72,6 @@ class UserFolder : AppCompatActivity(){
             val intent=Intent(this,LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }
-        ////go home
-        ibtnhome.setOnClickListener {
-            val intent = Intent(this,UserFolder::class.java)
-            startActivity(intent)
         }
 
     }

@@ -7,12 +7,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import kotlinx.android.synthetic.main.folder_add.*
+import kotlinx.android.synthetic.main.activity_folder_add.*
 
-class FolderAdd:AppCompatActivity(){
+class FolderAddActivity:AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.folder_add)
+        setContentView(R.layout.activity_folder_add)
 
         // ok 버튼 리스
         btnOk.setOnClickListener {
@@ -21,7 +21,7 @@ class FolderAdd:AppCompatActivity(){
                 Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
             }else{  // 입력값이 있을 때
                 val folderTitle = etUserFolderTitle.text.toString()
-                val intent = Intent(this,UserFolder::class.java)
+                val intent = Intent(this,UserFolderActivity::class.java)
 
                 // user의 folder list에 result 추가
                 val user = application as User

@@ -4,13 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
-import com.example.smu_quiz_2.adapter.OdabFolderAdapter
-import kotlinx.android.synthetic.main.odab_detail.*
+import kotlinx.android.synthetic.main.activity_odab_detail.*
 
-class OdabDetail:AppCompatActivity(){
+class OdabDetailActivity:AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.odab_detail)
+        setContentView(R.layout.activity_odab_detail)
 
         val user = application as User
 

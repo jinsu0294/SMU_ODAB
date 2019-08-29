@@ -1,16 +1,16 @@
 package com.example.smu_quiz_2
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.example.smu_quiz_2.adapter.OdabFolderAdapter
-import kotlinx.android.synthetic.main.userfolder.*
+import kotlinx.android.synthetic.main.activity_userfolder.*
 
-class OdabFolder:AppCompatActivity(){
+class OdabFolderActivity:AppCompatActivity(){
 
     fun checkFolder(){
         // view 세팅
@@ -34,7 +34,7 @@ class OdabFolder:AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.userfolder)
+        setContentView(R.layout.activity_userfolder)
 
         checkFolder()
 
@@ -52,7 +52,7 @@ class OdabFolder:AppCompatActivity(){
 
         // 추가 버튼 리스너
         btnAdd.setOnClickListener {
-            val intent = Intent(this,OdabAdd::class.java)
+            val intent = Intent(this,OdabAddActivity::class.java)
             startActivityForResult(intent,1000)
         }
 

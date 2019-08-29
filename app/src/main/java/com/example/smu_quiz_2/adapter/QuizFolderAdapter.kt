@@ -39,6 +39,11 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): an
                 intent.putExtra("position", position)
                 itemView.context.startActivity(intent)
             }
+
+            // checkbox 선택
+            checkbox.setOnClickListener {
+
+            }
         }
     }
 }

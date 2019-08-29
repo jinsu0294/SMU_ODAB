@@ -110,7 +110,7 @@
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/edit_padding_left"
             />
 
         </LinearLayout>
@@ -135,12 +135,12 @@
                     android:layout_marginRight="@dimen/margin30"
             />
             <TextView
-                    android:id="@+id/etUserQuiz_2"
+                    android:id="@+id/tvUserQuiz_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/edit_padding_left"
             />
         </LinearLayout>
 
@@ -164,12 +164,12 @@
                     android:layout_marginRight="@dimen/margin30"
             />
             <TextView
-                    android:id="@+id/tvserQuiz_3"
+                    android:id="@+id/tvUserQuiz_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/edit_padding_left"
             />
         </LinearLayout>
 
@@ -198,7 +198,7 @@
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/edit_padding_left"
             />
         </LinearLayout>
 

@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.example.smu_quiz_2.adapter.QuizFolderAdapter
-import kotlinx.android.synthetic.main.quiz_folder.*
+import kotlinx.android.synthetic.main.activity_quiz_folder.*
 
-class QuizFolder:AppCompatActivity(){
+class QuizFolderActivity:AppCompatActivity(){
     fun checkFolder(){
 
         val user = application as User
@@ -32,7 +32,7 @@ class QuizFolder:AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.quiz_folder)
+        setContentView(R.layout.activity_quiz_folder)
 
         checkFolder()
 

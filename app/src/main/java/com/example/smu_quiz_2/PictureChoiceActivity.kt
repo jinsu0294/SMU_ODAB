@@ -1,27 +1,24 @@
 package com.example.smu_quiz_2
 
-import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.BitmapFactory
-import android.media.ImageReader
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.widget.ImageView
-import kotlinx.android.synthetic.main.odab_add.*
-import kotlinx.android.synthetic.main.picture_choice.*
+import kotlinx.android.synthetic.main.activity_odab_add.*
+import kotlinx.android.synthetic.main.activity_picture_choice.*
 import java.io.File
 
-class PictureChoice:AppCompatActivity(){
+class PictureChoiceActivity:AppCompatActivity(){
 
     var isPermission:Boolean = true
     var tempFile:File? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.picture_choice)
+        setContentView(R.layout.activity_picture_choice)
 
         // 사용자 권한 요청
         var permission = Permission(this, isPermission)

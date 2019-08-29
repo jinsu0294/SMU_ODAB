@@ -9,13 +9,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
-import kotlinx.android.synthetic.main.quiz_add.*
+import kotlinx.android.synthetic.main.activity_quiz_add.*
 
 class QuizAdd :AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.quiz_add)
+        setContentView(R.layout.activity_quiz_add)
 
         val user = application as User
 
@@ -72,8 +72,8 @@ class QuizAdd :AppCompatActivity(){
                 val explanation = etUserQuizExplanation.text.toString()
                 user.addQuiz(title,contents,quiz_1,quiz_2, quiz_3, quiz_4,answer,explanation)
 
-                // QuizFolder 액티비티로 전환
-                val intent = Intent(this,QuizFolder::class.java)
+                // QuizFolderActivity 액티비티로 전환
+                val intent = Intent(this,QuizFolderActivity::class.java)
                 startActivity(intent)
                 setResult(Activity.RESULT_OK)
                 finish()
