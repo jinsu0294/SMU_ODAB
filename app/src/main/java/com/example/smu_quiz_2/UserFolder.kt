@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.example.smu_quiz_2.adapter.FolderAdapter
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.userfolder.*
 
@@ -33,6 +34,14 @@ class UserFolder : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.userfolder)
 
+        //로그인 되어있는지 확인
+        auth = FirebaseAuth.getInstance()
+        if(auth.currentUser?.email==null){
+            val intent=Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         checkFolder()
 
         val user = application as User
@@ -46,7 +55,7 @@ class UserFolder : AppCompatActivity(){
         rvFolderRecyclerview.layoutManager = lm
         rvFolderRecyclerview.setHasFixedSize(true)
 
-        auth = FirebaseAuth.getInstance()
+
         tvId.text = auth.currentUser?.email
 
         // result code를 RESULT_OK로 설정(Singin Activity finish() 하려고
@@ -61,9 +70,10 @@ class UserFolder : AppCompatActivity(){
         }
         //logout
         btnLogout.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(this,LoginActivity::class.java)
+            FirebaseAuth.getInstance().signOut()
+            val intent=Intent(this,LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
         ////go home
         ibtnhome.setOnClickListener {
@@ -83,6 +93,5 @@ class UserFolder : AppCompatActivity(){
             }
         }
     }
-
 
 }
