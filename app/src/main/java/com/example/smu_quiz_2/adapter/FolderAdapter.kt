@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.example.smu_quiz_2.Folder
+import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.OdabFolderActivity
 import com.example.smu_quiz_2.QuizFolderActivity
 import com.example.smu_quiz_2.R

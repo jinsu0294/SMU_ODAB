@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.smu_quiz_2.Odab
+import com.example.smu_quiz_2.data_class.Odab
 import com.example.smu_quiz_2.OdabDetailActivity
 import com.example.smu_quiz_2.R
 

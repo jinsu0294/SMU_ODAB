@@ -1,4 +1,4 @@
-package com.example.smu_quiz_2
+package com.example.smu_quiz_2.data_class
 
 import android.graphics.Picture
 

@@ -1,4 +1,6 @@
-package com.example.smu_quiz_2
+package com.example.smu_quiz_2.data_class
+
+import android.widget.Checkable
 
 class Quiz(
     var title:String,
@@ -8,5 +10,6 @@ class Quiz(
     var quiz_3:String,
     var quiz_4:String,
     var answer:Int,
-    var explanation:String
+    var explanation:String,
+    var isChecked: Boolean
 )
