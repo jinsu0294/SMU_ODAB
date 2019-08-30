@@ -2,14 +2,19 @@ package com.example.smu_quiz_2
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_odab_add.*
 import kotlinx.android.synthetic.main.activity_quiz_add.*
+import kotlinx.android.synthetic.main.activity_quiz_add.btnSave
 
 class QuizAdd :AppCompatActivity(){
 
@@ -84,9 +89,6 @@ class QuizAdd :AppCompatActivity(){
             }
         }
 
-
-
-
-
     }
+
 }
