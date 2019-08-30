@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/folder_item_height"
             android:text="@string/nothing"
-            android:background="@color/darkPurple"
+            android:background="@drawable/round_fill"
             android:textColor="@color/white"
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold"
@@ -51,7 +51,7 @@
             android:layout_marginRight="@dimen/margin10"
             android:layout_marginBottom="@dimen/margin10"
 
-    >
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0">
 
     </androidx.recyclerview.widget.RecyclerView>
     <!-- 하부 -->

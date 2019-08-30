@@ -15,7 +15,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".UserFolder">
+        <activity android:name=".UserFolderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,17 +24,17 @@
         </activity>
         <activity android:name=".LoginActivity">
         </activity>
-        <activity android:name=".FolderAdd">
+        <activity android:name=".FolderAddActivity">
         </activity>
-        <activity android:name=".OdabAdd">
+        <activity android:name=".OdabAddActivity">
         </activity>
-        <activity android:name=".OdabFolder">
+        <activity android:name=".OdabFolderActivity">
         </activity>
-        <activity android:name=".OdabDetail">
+        <activity android:name=".OdabDetailActivity">
         </activity>
-        <activity android:name=".PictureChoice">
+        <activity android:name=".PictureChoiceActivity">
         </activity>
-        <activity android:name=".QuizFolder">
+        <activity android:name=".QuizFolderActivity">
         </activity>
         <activity android:name=".QuizAdd">
         </activity>

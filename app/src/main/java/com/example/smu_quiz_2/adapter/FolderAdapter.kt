@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.example.smu_quiz_2.Folder
-import com.example.smu_quiz_2.OdabFolder
-import com.example.smu_quiz_2.QuizFolder
+import com.example.smu_quiz_2.data_class.Folder
+import com.example.smu_quiz_2.OdabFolderActivity
+import com.example.smu_quiz_2.QuizFolderActivity
 import com.example.smu_quiz_2.R
 
 
-class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): androidx.recyclerview.widget.RecyclerView.Adapter<FolderAdapter.Holder>(){
+class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): RecyclerView.Adapter<FolderAdapter.Holder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -29,23 +29,22 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): an
         holder?.bind(folderList[position], context)
     }
 
-    class Holder(itemView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(folderList: Folder, context:Context){
             val folderName = itemView.findViewById<TextView>(R.id.tvFolderName)
             val odab=itemView.findViewById<Button>(R.id.btnOdab)
             val quiz = itemView.findViewById<Button>(R.id.btnQuiz)
-            val solve = itemView.findViewById<Button>(R.id.btnSolve)
             folderName.text = folderList.folderTitle
 
             // 오답 버튼 리스너
             odab.setOnClickListener {
-                val intent = Intent(context, OdabFolder::class.java)
+                val intent = Intent(context, OdabFolderActivity::class.java)
                 itemView.context.startActivity(intent)
             }
 
             // 문제 풀기 리스너
             quiz.setOnClickListener {
-                val intent = Intent(context, QuizFolder::class.java)
+                val intent = Intent(context, QuizFolderActivity::class.java)
                 itemView.context.startActivity(intent)
             }
         }

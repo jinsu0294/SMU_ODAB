@@ -10,7 +10,7 @@
             android:id="@+id/tvOdabTitle"
             android:layout_width="0dp"
             android:layout_height="@dimen/folder_item_height"
-            android:background="@color/darkPurple"
+            android:background="@drawable/round_fill"
             android:layout_marginTop="@dimen/margin10"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
