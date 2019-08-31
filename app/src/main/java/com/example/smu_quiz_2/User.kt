@@ -1,6 +1,8 @@
 package com.example.smu_quiz_2
 
 import android.app.Application
+import android.graphics.Bitmap
+import android.net.Uri
 import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.data_class.Odab
 import com.example.smu_quiz_2.data_class.Quiz
@@ -14,6 +16,8 @@ class User: Application() {
     var odablist = arrayListOf<Odab>()
 
     var quizlist = arrayListOf<Quiz>()
+
+    var photo: Bitmap? = null
 
     // userId 저장
     fun setId(userId:String){
@@ -39,8 +43,8 @@ class User: Application() {
     }
 
     // odab list 추가
-    fun addodab(title:String, textcontents:String){
-        this.odablist.add(Odab(title, textcontents))
+    fun addodab(title:String, textcontents:String, image:Bitmap?){
+        this.odablist.add(Odab(title, textcontents, image))
     }
 
     fun getodab():String?{

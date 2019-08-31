@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_odab_add.*
 import kotlinx.android.synthetic.main.activity_odab_detail.*
 
 class OdabDetailActivity:AppCompatActivity(){
@@ -18,6 +19,7 @@ class OdabDetailActivity:AppCompatActivity(){
         if(postion != -1){
             tvUserOdabTitle.text = user.odablist[postion].title
             tvUserTextContents.text = user.odablist[postion].textContents
+            ImageView.setImageBitmap(user.odablist[postion].image)
         }else{
             Toast.makeText(this,getString(R.string.error),Toast.LENGTH_SHORT).show()
             finish()

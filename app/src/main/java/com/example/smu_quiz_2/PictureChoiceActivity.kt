@@ -21,7 +21,7 @@ import java.io.File
 class PictureChoiceActivity:AppCompatActivity(){
 
     var isPermission:Boolean = true
-    var tempFile:File? = null
+//    var tempFile:File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,6 @@ class PictureChoiceActivity:AppCompatActivity(){
                 startActivityForResult(intent, PICK_FROM_ALBUM)
 
             }else{  // 권한을 거부 했을 때
-
                 Toast.makeText(this,getString(R.string.disagree),Toast.LENGTH_SHORT).show()
             }
         }
@@ -51,20 +50,26 @@ class PictureChoiceActivity:AppCompatActivity(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == PICK_FROM_ALBUM){
-            val intent = Intent(this,OdabAddActivity::class.java)
-            startActivityForResult(intent, 10000)
-            finish()
-
-        }else if(requestCode == 500){
-            setResult(Activity.RESULT_OK)
+        val user = application as User
+        when(requestCode){
+            PICK_FROM_ALBUM ->{
+                // 이미지 경로를 이용하여 비트맵으로 변경
+                val photoUri = data!!.data
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,photoUri)
+//           val size = bitmap.height * (1024/bitmap.width)
+                val result = Bitmap.createScaledBitmap(bitmap, 100,100,true)
+                user.photo = result
+                setResult(SELECT_PIC_ALBUM)
+                Log.e("PHOTO URI",photoUri.toString())
+                finish()
+            }
         }
 
     }
 
     companion object{
         val PICK_FROM_ALBUM = 2000
+        val SELECT_PIC_ALBUM = 4000
     }
 
 }

@@ -49,11 +49,10 @@ class OdabFolderActivity:AppCompatActivity(){
         rvFolderRecyclerview.layoutManager = lm
         rvFolderRecyclerview.setHasFixedSize(true)
 
-
         // 추가 버튼 리스너
         btnAdd.setOnClickListener {
             val intent = Intent(this,OdabAddActivity::class.java)
-            startActivityForResult(intent,1000)
+            startActivityForResult(intent, CHANGE_ACTIVITY)
         }
 
     }
@@ -61,8 +60,13 @@ class OdabFolderActivity:AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        when(resultCode){
-            Activity.RESULT_OK -> finish()
+        if(resultCode == Activity.RESULT_OK){
+            finish()
         }
+
+    }
+
+    companion object{
+        val CHANGE_ACTIVITY = 900
     }
 }
