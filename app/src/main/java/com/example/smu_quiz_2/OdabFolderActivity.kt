@@ -67,6 +67,6 @@ class OdabFolderActivity:AppCompatActivity(){
     }
 
     companion object{
-        val CHANGE_ACTIVITY = 900
+        val CHANGE_ACTIVITY = 100
     }
 }

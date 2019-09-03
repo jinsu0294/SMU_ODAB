@@ -17,20 +17,12 @@ import kotlinx.android.synthetic.main.activity_odab_add.*
 import java.io.File
 
 class OdabAddActivity:AppCompatActivity(){
-    private var tempFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_odab_add)
 
         val user = application as User
-//
-//        val photoUri = user.photoUri
-//        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,photoUri)
-////           val size = bitmap.height * (1024/bitmap.width)
-//        val result = Bitmap.createScaledBitmap(bitmap, 100,100,true)
-
-
 
         // 저장 버튼 리스너
         btnSave.setOnClickListener {
@@ -58,6 +50,7 @@ class OdabAddActivity:AppCompatActivity(){
         super.onActivityResult(requestCode, resultCode, data)
 
         val user = application as User
+
         when(requestCode){
             BUTTON_SAVE->{
                 setResult(Activity.RESULT_OK)

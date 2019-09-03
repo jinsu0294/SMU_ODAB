@@ -92,9 +92,9 @@ class PictureChoiceActivity:AppCompatActivity(){
     }
 
     companion object{
-        val PICK_FROM_ALBUM = 2000
-        val SELECT_PIC_ALBUM = 4000
-        val PICK_FROM_CAMERA = 6000
+        val PICK_FROM_ALBUM = 200
+        val SELECT_PIC_ALBUM = 300
+        val PICK_FROM_CAMERA = 400
     }
 
 }
