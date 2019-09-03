@@ -18,11 +18,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".UserFolderActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity">
         </activity>
@@ -41,6 +36,15 @@
         <activity android:name=".QuizAdd">
         </activity>
         <activity android:name=".QuizDetail">
+        </activity>
+
+        <!-- 스플래쉬 -->
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <!-- 사진 촬영을 위한 프로바이더 -->
