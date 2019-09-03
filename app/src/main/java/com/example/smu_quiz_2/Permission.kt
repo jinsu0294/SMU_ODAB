@@ -5,9 +5,9 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import java.util.ArrayList
 
-class Permission (context1: Context, isPsermission1:Boolean){
-    var context = context1
-    var isPermission = isPsermission1
+class Permission (context: Context, isPsermission:Boolean){
+    var context = context
+    var isPermission = isPsermission
 
     var permissionlistener:PermissionListener = object :PermissionListener{
 

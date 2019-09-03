@@ -19,6 +19,9 @@ class User: Application() {
 
     var photo: Bitmap? = null
 
+    fun setphoto(bitmap: Bitmap){
+        this.photo = bitmap
+    }
     // userId 저장
     fun setId(userId:String){
         this.user = userId

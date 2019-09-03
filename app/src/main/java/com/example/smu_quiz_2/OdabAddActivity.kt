@@ -66,8 +66,11 @@ class OdabAddActivity:AppCompatActivity(){
         }
 
         when(resultCode){
+
             Activity.RESULT_OK -> finish()
+            // PictureChoiceActivity에서 result Code로 SELECT_PIC_ALBUM 넘어옴
             PictureChoiceActivity.SELECT_PIC_ALBUM -> {
+                Log.e("IMAGE SET","!!yes!!")
                 ivPicture.setImageBitmap(user.photo)
                 btnPictureAdd.visibility = View.GONE
             }
