@@ -32,6 +32,7 @@ class SplashActivity:AppCompatActivity(){
         ivSplash.setImageResource(R.drawable.anim)
 
         val animation = ivSplash.drawable as AnimationDrawable
+
         if(animation != null){
             animation.start()
         }else{
@@ -43,7 +44,7 @@ class SplashActivity:AppCompatActivity(){
         currentUser = auth.currentUser.toString()
 
         var handler = Handler()
-        
+
         if(currentUser != null){
             handler.postDelayed(userfolder, 4000)
         }else{

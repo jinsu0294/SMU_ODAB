@@ -10,6 +10,7 @@ import com.example.smu_quiz_2.data_class.Quiz
 class User: Application() {
 
     var user: String? = null
+    var ispermission:Boolean? = null
 
     var folderList = arrayListOf<Folder>()
 
@@ -18,6 +19,13 @@ class User: Application() {
     var quizlist = arrayListOf<Quiz>()
 
     var photo: Bitmap? = null
+
+    fun setPermission(permission:Boolean?){
+        this.ispermission = permission
+    }
+    fun getPermission():Boolean?{
+        return this.ispermission
+    }
 
     fun setphoto(bitmap: Bitmap){
         this.photo = bitmap

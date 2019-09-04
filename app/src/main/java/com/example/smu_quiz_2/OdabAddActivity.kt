@@ -51,6 +51,7 @@ class OdabAddActivity:AppCompatActivity(){
 
         val user = application as User
 
+        // 저장 버튼 눌렀을 때
         when(requestCode){
             BUTTON_SAVE->{
                 setResult(Activity.RESULT_OK)
@@ -58,8 +59,8 @@ class OdabAddActivity:AppCompatActivity(){
             }
         }
 
+        // result code로 RESULT_OK 오면 액티비티 finish()
         when(resultCode){
-
             Activity.RESULT_OK -> finish()
             // PictureChoiceActivity에서 result Code로 SELECT_PIC_ALBUM 넘어옴
             PictureChoiceActivity.SELECT_PIC_ALBUM -> {

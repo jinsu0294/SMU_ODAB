@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
@@ -13,37 +14,49 @@ import kotlinx.android.synthetic.main.activity_picture_choice.*
 
 class PictureChoiceActivity:AppCompatActivity(){
 
-    // 권한 허락 여부 변수
-    var isPermission:Boolean = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_choice)
 
+        val user = User()
+
         // 사용자 권한 요청
-        var permission = Permission(this, isPermission)
+        var permission = Permission(this)
         permission.checkPer()
+
+        // 쉐어프리퍼런스 선언
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+
+        // 사용자 권한 결과 가져와서 user에 저장
+        val isPermission = pref.getBoolean("isPermission", false)
+        user.setPermission(isPermission)
+
+        // user에 저장한 사용자 권한 결과를 resultPer 변수로 사용
+        val resultPer = user.getPermission()
 
         // 가져오기 버튼 리스너
         btnGetPicture.setOnClickListener {
-            // 사용자가 권한을 허락 했을 때
-            if (permission.isPermission) {
+            // 사용자가 권한 허락
+            if (resultPer == true) {
                 // ACTION_GET_CONTENT (앨범호출)
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = ("image/*")   // 이미지만 보이게하는 설정
                 Log.e("앨범열기","YES")
                 startActivityForResult(intent, PICK_FROM_ALBUM)
-            }else{  // 권한을 거부 했을 때
+            }else{  // 권한 거부
                 Toast.makeText(this,getString(R.string.disagree),Toast.LENGTH_SHORT).show()
             }
         }
         // 촬영 버튼 리스너
         btnTakePicture.setOnClickListener {
-            if(permission.isPermission){
+            // 사용자가 권한 허락
+            if(resultPer == true){
                 // 카메라 호출
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 Log.e("카메라열기","!!yes!!")
                 startActivityForResult(intent, PICK_FROM_CAMERA)
+            }else{ // 권한 거부
+                Toast.makeText(this,getString(R.string.disagree),Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -72,10 +85,12 @@ class PictureChoiceActivity:AppCompatActivity(){
             PICK_FROM_CAMERA ->{    //
                 Log.e("init camera","!!yes!!")
                 // 인텐트가 null이 아닐 때
-                if(data!!.hasExtra("data")){
+                if(data != null){
                     val bitmap = data.extras.get("data") as Bitmap
                     user.setphoto(bitmap)
                     setResult(SELECT_PIC_ALBUM)
+                    finish()
+                }else{
                     finish()
                 }
 
