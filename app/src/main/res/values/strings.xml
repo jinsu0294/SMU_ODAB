@@ -33,7 +33,7 @@
     <string name="way_permission">[설정] -> [권한] 에서 권한을 허용할 수 있습니다.</string>
 
     <string name="take_picture">촬영하기</string>
-    <string name="get_picture">가져오기</string>
+    <string name="get_picture">앨범</string>
     
     <string name="disagree">권한이 거부되었습니다.</string>
 
