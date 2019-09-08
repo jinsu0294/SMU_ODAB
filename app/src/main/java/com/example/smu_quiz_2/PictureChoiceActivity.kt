@@ -47,7 +47,7 @@ class PictureChoiceActivity: AppCompatActivity(){
         startActivityForResult(intent, PICK_FROM_CAMERA)
     }
 
-    // 이미지 파일 만들기 (사진찍고 크롭을 해야해서 필요합니다.)
+    // 이미지 파일 만들기 (사진찍고 크롭을 할 때 필요한것 같은데 못 함)
     private fun createImageFile(): File{
         Log.e("createImageFIle()","!!yes!!")
 
@@ -82,8 +82,8 @@ class PictureChoiceActivity: AppCompatActivity(){
         Toast.makeText(this,"용량이 큰 경우 시간이 오래걸릴 수 있습니다.", Toast.LENGTH_SHORT).show()
         intent.putExtra("crop",true)    // 카메라 찍고 바로 자르기 설정
 
-        intent.putExtra("outputX", 300)  // crop한 이미지의 x축 크기
-        intent.putExtra("outputY", 300)  // crop한 이미지의 y축 크기
+//        intent.putExtra("outputX", 1024)  // crop한 이미지의 x축 크기
+//        intent.putExtra("outputY", 1024)  // crop한 이미지의 y축 크기
         intent.putExtra("aspectX", 1)   // crop 박스의 x축 비율
         intent.putExtra("aspectY", 1)   // crop 박스의 y축 비율
         intent.putExtra("scale", true)  // 비율 설정 해놔서 scale true 한 것 같음
@@ -164,6 +164,7 @@ class PictureChoiceActivity: AppCompatActivity(){
 //                    Log.e("pick_from_camer_photouri",photoUri.toString())
 
 //                    cropImage()
+                    Log.e("camera Uri", photoUri.toString())
                     val bitmap = data.extras.get("data") as Bitmap
                     user.setphoto(bitmap)
                     setResult(SELECT_PHOTO)
