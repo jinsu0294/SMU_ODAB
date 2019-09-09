@@ -64,7 +64,7 @@ class UserFolderActivity : AppCompatActivity(){
         // 추가 버튼 리스너
         btnAdd.setOnClickListener {
             val intent = Intent(this,FolderAddActivity::class.java)
-            startActivityForResult(intent,102)
+            startActivityForResult(intent, SELECT_ADD)
         }
         //logout
         btnLogout.setOnClickListener {
@@ -85,6 +85,10 @@ class UserFolderActivity : AppCompatActivity(){
                 Log.e("folder add result","ok")
             }
         }
+    }
+
+    companion object{
+        val SELECT_ADD = 500
     }
 
 }

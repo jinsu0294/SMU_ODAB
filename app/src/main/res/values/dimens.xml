@@ -31,4 +31,7 @@
     <!-- textView -->
     <dimen name="text_box_height">40dp</dimen>
 
+    <!-- main icon size -->
+    <dimen name="main_icon_size">200dp</dimen>
+
 </resources>

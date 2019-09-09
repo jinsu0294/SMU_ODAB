@@ -1,6 +1,8 @@
 package com.example.smu_quiz_2
 
 import android.app.Application
+import android.graphics.Bitmap
+import android.net.Uri
 import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.data_class.Odab
 import com.example.smu_quiz_2.data_class.Quiz
@@ -8,6 +10,7 @@ import com.example.smu_quiz_2.data_class.Quiz
 class User: Application() {
 
     var user: String? = null
+    var ispermission:Boolean? = null
 
     var folderList = arrayListOf<Folder>()
 
@@ -15,6 +18,18 @@ class User: Application() {
 
     var quizlist = arrayListOf<Quiz>()
 
+    var photo: Bitmap? = null
+
+    fun setPermission(permission:Boolean?){
+        this.ispermission = permission
+    }
+    fun getPermission():Boolean?{
+        return this.ispermission
+    }
+
+    fun setphoto(bitmap: Bitmap){
+        this.photo = bitmap
+    }
     // userId 저장
     fun setId(userId:String){
         this.user = userId
@@ -39,8 +54,8 @@ class User: Application() {
     }
 
     // odab list 추가
-    fun addodab(title:String, textcontents:String){
-        this.odablist.add(Odab(title, textcontents))
+    fun addodab(title:String, textcontents:String, image:Bitmap?){
+        this.odablist.add(Odab(title, textcontents, image))
     }
 
     fun getodab():String?{
