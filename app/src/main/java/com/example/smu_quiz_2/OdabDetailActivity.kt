@@ -1,5 +1,7 @@
 package com.example.smu_quiz_2
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
@@ -19,7 +21,10 @@ class OdabDetailActivity:AppCompatActivity(){
         if(position != -1){
             tvUserOdabTitle.text = user.odablist[position].title
             tvUserTextContents.text = user.odablist[position].textContents
-            ImageView.setImageBitmap(user.odablist[position].image)
+            //크기 조절
+            var mbitmap = Bitmap.createScaledBitmap(user.odablist[position].image,870,870,true)
+            ImageView.setImageBitmap(mbitmap)
+            Log.e("dddd",mbitmap.byteCount.toString())
         }else{
             Toast.makeText(this,getString(R.string.error),Toast.LENGTH_SHORT).show()
             finish()
