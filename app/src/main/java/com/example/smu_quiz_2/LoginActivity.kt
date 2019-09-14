@@ -68,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this,UserFolderActivity::class.java)
                     startActivity(intent)
                     finish()
-
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
