@@ -14,6 +14,13 @@ class QuizDetail :AppCompatActivity(){
         val user = application as User
         var position = intent.getIntExtra("position", -1)
 
+        // TODO:: 퀴즈 조회(API문서상 실상은 퀴즈 상세 조회입니다.)
+        // @GET /folder/manage?Management_id=pk
+        // pk로 quiz_id (퀴즈 아이디)를 보냅니다.
+        // quiz_id, title, text, choice_1, choice_2, choice_3, choice_4, answer, explain, email 을 받습니다.
+        // title, text, choice_1, choice_2, choice_3, choice_4, answer, explain 을 뷰에 보여줍니다.
+
+
         tvUserQuizTitle.text = user.quizlist[position].title
         tvUserQuizContents.text = user.quizlist[position].text
         tvUserQuiz_1.text = user.quizlist[position].choice_1

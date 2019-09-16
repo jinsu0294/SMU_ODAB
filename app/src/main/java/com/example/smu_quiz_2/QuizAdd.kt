@@ -81,6 +81,10 @@ class QuizAdd :AppCompatActivity(){
                 var Management_id = -1
                 var isChecked = false   // isChecked는 체크박스의 체크상태 의미( false == 선택X , true == 선택O )
 
+                // TODO:: 퀴즈 생성
+                // @POST /folder/problem
+                // quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer, explain, Management_id 를 넘겨줍니다.
+                // (quiz_id 는 빈 상태로 보냅니다.)
                 // user의 addQuiz()함수로 quizList에 저장
                 user.addQuiz(quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer,explain,Management_id,isChecked)
 

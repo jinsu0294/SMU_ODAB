@@ -19,16 +19,16 @@ class FolderAddActivity:AppCompatActivity(){
             // 입력값이 없을 때
             if(etUserFolderTitle.text.isEmpty()){
                 Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
-            }else{  // 입력값이 있을 때
+            }else{  // 입력값이 모두 있을 때
                 val folderTitle = etUserFolderTitle.text.toString()
-                val intent = Intent(this,UserFolderActivity::class.java)
 
-                // user의 folder list에 result 추가
+                // TODO:: 폴더생성
+                // @POST /folder/list
+                // title(폴더 제목), email(사용자 이메일) 보낸다.
+
+                val intent = Intent(this,UserFolderActivity::class.java)
                 val user = application as User
                 user.add(folderTitle)
-
-                //통신 : folder 생성
-                //추가 버튼 누르면 title이랑 이메일 보내줘서 폴더 만들어주기
 
 
 

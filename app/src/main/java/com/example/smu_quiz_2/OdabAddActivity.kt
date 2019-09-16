@@ -29,7 +29,12 @@ class OdabAddActivity:AppCompatActivity(){
             // 입력값이 없는 경우
             if(etUserOdabTitle.text.isEmpty()|| etUserOdabTextContents.text.isEmpty() || user.photo == null){
                 Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
-            }else{  // 입력값이 있는 경우
+            }else{  // 입력값이 모두 있는 경우
+
+                // TODO:: 오답노트생성
+                // @POST /folder/wrong
+                // email(이메일), image(이미지), title(오답제목), text(오답설명), Management_id(폴더아이디) 를 보냅니다.
+
                 val user = application as User
                 val intent = Intent(this, OdabFolderActivity::class.java)
                 // user - odab list 추가(title, contents)
