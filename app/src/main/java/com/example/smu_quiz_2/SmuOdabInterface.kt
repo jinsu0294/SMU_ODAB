@@ -1,6 +1,6 @@
 package com.example.smu_quiz_2
 
-import com.example.smu_quiz_2.data_class.Quiz
+import com.example.smu_quiz_2.data_class.Quiz_smu
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -18,7 +18,7 @@ interface SmuOdabInterface {
     fun getUser(): Observable<List<User>>
 
     @POST("/folder/problem")
-    fun createQuiz(@Body value: Quiz): Flowable<Quiz>
+    fun createQuiz(@Body value: Quiz_smu): Flowable<Quiz_smu>
 
 ///folder/problem
 

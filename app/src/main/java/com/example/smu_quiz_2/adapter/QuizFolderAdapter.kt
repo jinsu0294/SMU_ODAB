@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import com.example.smu_quiz_2.R
-import com.example.smu_quiz_2.data_class.Quiz
 import com.example.smu_quiz_2.QuizDetail
-import com.example.smu_quiz_2.User
+import com.example.smu_quiz_2.data_class.Quiz_smu
 
 // 문제풀기 폴더 Adapter
-class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): androidx.recyclerview.widget.RecyclerView.Adapter<QuizFolderAdapter.Holder>(){
+class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz_smu>): androidx.recyclerview.widget.RecyclerView.Adapter<QuizFolderAdapter.Holder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.quiz_folder_item,parent,false)
@@ -25,11 +24,11 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): an
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(quizList[position],context, position)
+        holder.bind(quizList[position],context, position)
     }
 
     class Holder(itemView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView){
-        fun bind(quizList: Quiz, context: Context, position: Int){
+        fun bind(quizList: Quiz_smu, context: Context, position: Int){
 
             var quizTitle = itemView.findViewById<TextView>(R.id.tvQuizTitle)
             var checkbox=itemView.findViewById<CheckBox>(R.id.checkbox)

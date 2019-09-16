@@ -15,12 +15,12 @@ class QuizDetail :AppCompatActivity(){
         var position = intent.getIntExtra("position", -1)
 
         tvUserQuizTitle.text = user.quizlist[position].title
-        tvUserQuizContents.text = user.quizlist[position].contents
-        tvUserQuiz_1.text = user.quizlist[position].quiz_1
-        tvUserQuiz_2.text = user.quizlist[position].quiz_2
-        tvUserQuiz_3.text = user.quizlist[position].quiz_3
-        tvUserQuiz_4.text = user.quizlist[position].quiz_4
-        tvUserQuizExplanation.text = user.quizlist[position].explanation
+        tvUserQuizContents.text = user.quizlist[position].text
+        tvUserQuiz_1.text = user.quizlist[position].choice_1
+        tvUserQuiz_2.text = user.quizlist[position].choice_2
+        tvUserQuiz_3.text = user.quizlist[position].choice_3
+        tvUserQuiz_4.text = user.quizlist[position].choice_4
+        tvUserQuizExplanation.text = user.quizlist[position].explain
 
     }
 }

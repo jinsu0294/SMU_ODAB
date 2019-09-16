@@ -5,11 +5,12 @@ data class Quiz_smu(
     var email: String,
     var title: String,
     var text: String,
-    var choice_1: Char,
-    var choice_2: Char,
-    var choice_3: Char,
-    var choice_4: Char,
+    var choice_1: String,
+    var choice_2: String,
+    var choice_3: String,
+    var choice_4: String,
     var answer: Int,
     var explain: String,
-    var Management_id: Int
+    var Management_id: Int,
+    var isChecked: Boolean
 )
