@@ -1,5 +1,6 @@
 package com.example.smu_quiz_2
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
@@ -28,6 +29,11 @@ class OdabDetailActivity:AppCompatActivity(){
         }else{
             Toast.makeText(this,getString(R.string.error),Toast.LENGTH_SHORT).show()
             finish()
+        }
+        btnPaint.setOnClickListener {
+            val intent = Intent(this, OdabPaintActivity::class.java)
+            intent.putExtra("position",position)
+            startActivity(intent)
         }
     }
 }

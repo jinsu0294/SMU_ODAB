@@ -17,6 +17,13 @@
     <color name="black">#000000</color>
     <color name="grey">#A5A4A4</color>
 
+    <!-- 마킹에 있는 색들-->
+    <color name="color1">#FF0000</color>
+    <color name="color2">#FFEB3B</color>
+    <color name="color3">#4CAF50</color>
+    <color name="color4">#3F51B5</color>
+    <color name="color5">#000000</color>
+
 
 
 </resources>

@@ -14,19 +14,7 @@ class UserFolderActivity : AppCompatActivity(){
 
     private lateinit var auth: FirebaseAuth
 
-    fun checkFolder(){
-        // 폴더가 없는 경우
-        val user = application as User
-        val mAdapter = FolderAdapter(this, user.folderList)
-        Log.e("폴더리스트 사이즈",mAdapter.itemCount.toString())
-        if(mAdapter.itemCount == 0){
-            tvNothing.visibility = View.VISIBLE
-            rvFolderRecyclerview.visibility = View.INVISIBLE
-        }else{  // 폴더가 있는 경우
-            tvNothing.visibility = View.GONE
-            rvFolderRecyclerview.visibility = View.VISIBLE
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +26,16 @@ class UserFolderActivity : AppCompatActivity(){
             val intent=Intent(this,LoginActivity::class.java)
             startActivity(intent)
             finish()
+        }else{
+            //통신 :
+            // 사용자 검색을 해서 이미 등록되있는 사용자라면
+            // 로그인만 해주고
+            // 맨처음이라면 auth.currentUser!!.email 를 사용자 등록
         }
+
+        // 통신 : 이메일로 폴더조회
+        // 이메일 넘겨주면 이메일에 해당되는 폴더 다 보내줌
+        // 그걸 사용자 폴더에 다 저장 시켜주고 오답 어댑터에서 불러와주면 될듯
 
         checkFolder()
 
@@ -84,6 +81,19 @@ class UserFolderActivity : AppCompatActivity(){
             Activity.RESULT_OK -> {finish()
                 Log.e("folder add result","ok")
             }
+        }
+    }
+    fun checkFolder(){
+        // 폴더가 없는 경우
+        val user = application as User
+        val mAdapter = FolderAdapter(this, user.folderList)
+        Log.e("폴더리스트 사이즈",mAdapter.itemCount.toString())
+        if(mAdapter.itemCount == 0){
+            tvNothing.visibility = View.VISIBLE
+            rvFolderRecyclerview.visibility = View.INVISIBLE
+        }else{  // 폴더가 있는 경우
+            tvNothing.visibility = View.GONE
+            rvFolderRecyclerview.visibility = View.VISIBLE
         }
     }
 
