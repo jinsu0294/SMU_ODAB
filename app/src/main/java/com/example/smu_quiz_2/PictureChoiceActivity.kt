@@ -1,27 +1,18 @@
 package com.example.smu_quiz_2
 
 import android.app.Activity
-import android.app.VoiceInteractor
-import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
-import androidx.core.content.FileProvider
-import com.google.android.gms.common.data.BitmapTeleporter
 import kotlinx.android.synthetic.main.activity_picture_choice.*
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 class PictureChoiceActivity: AppCompatActivity(){
 

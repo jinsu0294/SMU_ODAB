@@ -68,12 +68,24 @@
         />
     </ScrollView>
 
+    <Button
+            android:id="@+id/btnPaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="marking"
+            android:backgroundTint="@color/darkPurple"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/svPicture"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"
+
+    />
     <View
             android:id="@+id/line2"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_view_height"
             android:background="@color/grey"
-            app:layout_constraintTop_toBottomOf="@id/svPicture"
+            app:layout_constraintTop_toBottomOf="@id/btnPaint"
             app:layout_constraintLeft_toLeftOf="@id/line1"
             app:layout_constraintRight_toRightOf="@id/line1"
             android:layout_marginTop="@dimen/margin10"
