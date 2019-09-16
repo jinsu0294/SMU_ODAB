@@ -2,7 +2,6 @@ package com.example.smu_quiz_2
 
 import android.app.Application
 import android.graphics.Bitmap
-import android.net.Uri
 import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.data_class.Odab
 import com.example.smu_quiz_2.data_class.Quiz
@@ -48,7 +47,7 @@ class User: Application() {
     fun getfolder():String?{
         var name:String? = null
         for (i in 0..folderList.size-1){
-            name = "${name} + ${folderList[i].folderTitle}"
+            name = "${name} + ${folderList[i].title}"
         }
         return name
     }

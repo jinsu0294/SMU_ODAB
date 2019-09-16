@@ -34,7 +34,7 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): Re
             val folderName = itemView.findViewById<TextView>(R.id.tvFolderName)
             val odab=itemView.findViewById<Button>(R.id.btnOdab)
             val quiz = itemView.findViewById<Button>(R.id.btnQuiz)
-            folderName.text = folderList.folderTitle
+            folderName.text = folderList.title
 
             // 오답 버튼 리스너
             odab.setOnClickListener {

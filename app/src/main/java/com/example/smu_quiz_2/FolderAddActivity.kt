@@ -32,9 +32,9 @@ class FolderAddActivity:AppCompatActivity(){
 
 
 
-                // 인텐트로 folderTitle 넘겨줌
+                // 인텐트로 title 넘겨줌
                 // 통신 되면 여기는 없어져도 됨
-                intent.putExtra("folderTitle",folderTitle)
+                intent.putExtra("title",folderTitle)
                 startActivity(intent)
                 setResult(Activity.RESULT_OK)
                 Log.e("Folder Add finish","yes")
