@@ -1,6 +1,6 @@
 package com.example.smu_quiz_2.data_class
 
-data class Quiz_smu(
+data class Quiz(
     var quiz_id: Int,
     var email: String,
     var title: String,

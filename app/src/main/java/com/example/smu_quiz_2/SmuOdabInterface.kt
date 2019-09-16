@@ -1,11 +1,10 @@
 package com.example.smu_quiz_2
 
-import com.example.smu_quiz_2.data_class.Quiz_smu
+
+import com.example.smu_quiz_2.data_class.Quiz
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface SmuOdabInterface {
@@ -18,7 +17,11 @@ interface SmuOdabInterface {
     fun getUser(): Observable<List<User>>
 
     @POST("/folder/problem")
-    fun createQuiz(@Body value: Quiz_smu): Flowable<Quiz_smu>
+    fun createQuiz(@Body value: Quiz): Flowable<Quiz>
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE",path = "{/folder/problem/{id}}",hasBody = true)
+    fun deleteQuiz(@Path("id") id: String, @Body value: User): Flowable<User>
 
 ///folder/problem
 

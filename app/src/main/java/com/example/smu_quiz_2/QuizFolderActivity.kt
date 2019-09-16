@@ -60,6 +60,7 @@ class QuizFolderActivity:AppCompatActivity(){
         }
 
         var click = -1
+        var sd:String= "12312"
 
         // 전체선택 버튼 리스너
         btnAllCheck.setOnClickListener {

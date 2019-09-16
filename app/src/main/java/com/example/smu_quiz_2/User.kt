@@ -4,7 +4,7 @@ import android.app.Application
 import android.graphics.Bitmap
 import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.data_class.Odab
-import com.example.smu_quiz_2.data_class.Quiz_smu
+import com.example.smu_quiz_2.data_class.Quiz
 
 class User: Application() {
 
@@ -15,7 +15,7 @@ class User: Application() {
 
     var odablist = arrayListOf<Odab>()
 
-    var quizlist = arrayListOf<Quiz_smu>()
+    var quizlist = arrayListOf<Quiz>()
 
     var photo: Bitmap? = null
 
@@ -70,7 +70,7 @@ class User: Application() {
         quiz_id:Int, email:String, title:String, text:String, choice_1: String, choice_2: String, choice_3:String, choice_4:String, answer:Int, explain:String,
         Management_id:Int, ischecked: Boolean){
         this.quizlist.add(
-            Quiz_smu(
+            Quiz(
                 quiz_id,
                 email,
                 title,
