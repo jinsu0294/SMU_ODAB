@@ -2,6 +2,7 @@ package com.example.smu_quiz_2
 
 import android.app.Activity
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_picture_choice.*
+import java.io.File
 
 
 class PictureChoiceActivity: AppCompatActivity(){
@@ -28,8 +30,8 @@ class PictureChoiceActivity: AppCompatActivity(){
      private fun goToAlbum(){
         Log.e("GoToAlb]um","!!yes!!")
 
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = ("image/*")
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE)
         startActivityForResult(intent, PICK_FROM_ALBUM)
     }
 
@@ -39,9 +41,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intent, PICK_FROM_CAMERA)
     }
-
-    var photoUri: Uri? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,11 +87,23 @@ class PictureChoiceActivity: AppCompatActivity(){
                 Log.e("PICK_FROM_ALBUM","!!yes!!")
 
                 if(data!!.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
+                    var photoUri = data.data
+                    var cursor:Cursor?=null
+
+                    val proj = arrayOf(MediaStore.Images.Media.DATA)
+                    assert(photoUri != null)
+                    cursor = getContentResolver().query(photoUri, proj, null, null, null)
+                    assert(cursor != null)
+                    val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                    cursor.moveToFirst()
+                    var tempfile = File(cursor.getString(column_index))
+
+
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
-                    val mbitmap = BitmapFactory.decodeFile(data.data.toString(),myoption)
+                    val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
 
-                    user.setphoto(mbitmap)
+                    user.photo = mbitmap
                     setResult(SELECT_PHOTO)
                     finish()
                 }else{
@@ -104,7 +115,6 @@ class PictureChoiceActivity: AppCompatActivity(){
 
                 // 인텐트가 null이 아닐 때
                 if(data != null){
-                    Log.e("camera Uri", photoUri.toString())
 
                     //해상도
                     var myoption = BitmapFactory.Options()
@@ -119,23 +129,6 @@ class PictureChoiceActivity: AppCompatActivity(){
                 }
 
             }
-            CROP_PHOTO -> {
-                if(resultCode == Activity.RESULT_OK) {
-                    Log.e("CROP_PHOTO","!!yes!!")
-
-                    val bitmap = data!!.extras.get("data") as Bitmap
-
-                    user.photo = bitmap
-                    setResult(SELECT_PHOTO)
-
-//                    val file = File(mCurrentPhotoPath)
-//                    if(file.exists()){
-//                        file.delete()
-//                    }
-//
-                    finish()
-                }
-            }
             else -> {
                 Toast.makeText(applicationContext,"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 finish()
@@ -149,7 +142,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         val PICK_FROM_ALBUM = 200
         val SELECT_PHOTO = 300
         val PICK_FROM_CAMERA = 400
-        val CROP_PHOTO = 500
     }
 
 }
