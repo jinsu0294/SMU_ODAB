@@ -1,65 +1,76 @@
 package com.example.smu_quiz_2
 
 
-import com.example.smu_quiz_2.data_class.Quiz
+import com.example.smu_quiz_2.data_class.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.*
 
 
 interface SmuOdabInterface {
-
-
+    //이메일등록
     @POST("/user")
     fun setUser(@Body value: User): Flowable<User>
 
+    //유저들이메일불러오기
     @GET("/user")
     fun getUser(): Observable<List<User>>
 
+    //폴더생성
+    @POST("/folder/list")
+    fun createFolder(@Body value: CreateFolder)
+
+    //폴더조회 x
+    //폴더리스트조회 - 이메일로
+    @GET("/folder/search")
+    fun getForderList(@Query("email") email: String): Observable<FolderList>
+
+
+    //폴더삭제
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "{/folder/list/{folder_id}}", hasBody = true)
+    fun deleteFolder(@Path("id") id: String)
+
+    //퀴즈생성
     @POST("/folder/problem")
-    fun createQuiz(@Body value: Quiz): Flowable<Quiz>
+    fun createQuiz(@Body value: CreateQuiz): Flowable<Quiz>
 
+    //퀴즈삭제
     @FormUrlEncoded
-    @HTTP(method = "DELETE",path = "{/folder/problem/{id}}",hasBody = true)
-    fun deleteQuiz(@Path("id") id: String, @Body value: User): Flowable<User>
+    @HTTP(method = "DELETE", path = "{/folder/problem/{quiz_id}}", hasBody = true)
+    fun deleteQuiz(@Path("quiz_id") id: String)
 
-///folder/problem
+    //퀴즈 리스트조회
+    @GET("/folder/wrong/detail_quiz")
+    fun getQuizList(@Query("Management_id") forder_id: Int): Observable<QuizList>
 
-    /*
-    @GET("/quiz/mocktest?subject=Database&subject=operation_system")
-    fun test(): Observable<List<Quiz>>
+    //퀴즈상세조회
+    @GET("/folder/manage")
+    fun getQuiz(@Query("Management_id") quizId: Int): Observable<Quiz>
 
-    @GET("/quiz/mocktest")
-    fun getMocktest(@QueryMap option: Map<String, String>): Observable<List<Quiz>>
+    //문제리스트선택해서 풀기
+    //quiz_id=1
+    @GET("/folder/select")
+    fun getSelectQuizList(@QueryMap option: Map<String, Int>): Observable<Quiz>
 
-    @GET("/register/wrong")
-    fun getWorngNum(@Query("email") email: String): Observable<List<Wrong>>
 
-    @GET("/register/bookmark")
-    fun getBookMarkNum(@Query("email") email: String): Observable<List<Wrong>>
+    //오답노트생성
+    @POST("/folder/wrong")
+    fun createWrong(@Body value: CreateWrong)
 
-    @GET("/register/detail")
-    fun getWorngDetail(@Query("pr_id") wrongNum: Int): Observable<List<Quiz>>
+    //오답노트 리스트조회
+    @GET("/folder/wrong/detail_wrong")
+    fun getWrongList(@Query("Management_id") forder_id: Int): Observable<WrongList>
 
-    @GET("/quiz/request")
-    fun getDailyQuiz(@Query("subject") subject: String): Observable<List<Quiz>>
+    //오답노트상세조회
+    @GET("/folder/wrong/{wrong_id}")
+    fun getWrongDetail(): Observable<Wrong>
 
-    @POST("/register/wrong")
-    fun setWrongQuiz(@Body value: Wrong): Flowable<Wrong>
-
-    @POST("/register/bookmark")
-    fun setBookMark(@Body value: Wrong): Flowable<Wrong>
-
-    @POST("/register/user_list")
-    fun setUser(@Body value: User): Flowable<User>
-
+    //오답노트수정 x
+    //오답노트삭제
     @FormUrlEncoded
-    @HTTP(method = "DELETE",path = "{/register/bookmark/{id}}",hasBody = true)
-    fun deleteFavoirty(@Path("id") id: String, @Body value: User): Flowable<User>
+    @HTTP(method = "DELETE", path = "{/folder/wrong/{wrong_id}}", hasBody = true)
+    fun deleteWrong(@Path("wrong_id") id: String)
 
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "/register/wrong/{id}", hasBody = true)
-    fun deleteWrong(@Path("id") id: String,@Body value: User): Flowable<User>
-*/
 
 }
