@@ -22,10 +22,9 @@ class OdabDetailActivity:AppCompatActivity(){
         if(position != -1){
             tvUserOdabTitle.text = user.odablist[position].title
             tvUserTextContents.text = user.odablist[position].textContents
-            //크기 조절
-            var mbitmap = Bitmap.createScaledBitmap(user.odablist[position].image,870,870,true)
-            ImageView.setImageBitmap(mbitmap)
-            Log.e("dddd",mbitmap.byteCount.toString())
+//            var mbitmap = user.odablist[position].image
+            ivPictureDetail.setImageBitmap(user.odablist[position].image)
+
         }else{
             Toast.makeText(this,getString(R.string.error),Toast.LENGTH_SHORT).show()
             finish()
