@@ -7,16 +7,23 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_picture_choice.*
 import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PictureChoiceActivity: AppCompatActivity(){
+    var currentPhotoPath = ""
+
 
     // 권한이 거부되었습니다 토스트메시지 띄우는 함수
     private fun disagree(){
@@ -33,13 +40,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE)
         startActivityForResult(intent, PICK_FROM_ALBUM)
-    }
-
-    private fun goToCamera(){
-        Log.e("goToCamera()","!!yes!!")
-
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, PICK_FROM_CAMERA)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class PictureChoiceActivity: AppCompatActivity(){
             // 사용자가 권한 허락
             if(isPer == true){
                 // 카메라 호출
-                goToCamera()
+                dispatchTakePictureIntent()
 
             }else{ // 권한 거부
                 disagree()
@@ -86,7 +86,8 @@ class PictureChoiceActivity: AppCompatActivity(){
             PICK_FROM_ALBUM ->{
                 Log.e("PICK_FROM_ALBUM","!!yes!!")
 
-                if(data!!.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
+                if(data?.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
+                    //사진 URI = photoUri
                     var photoUri = data.data
                     var cursor:Cursor?=null
 
@@ -102,7 +103,9 @@ class PictureChoiceActivity: AppCompatActivity(){
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
                     val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
+                    val mintent = Intent(this,OdabPaintActivity::class.java)
 
+                    mintent.putExtra("bitmap",tempfile.absolutePath)
                     user.photo = mbitmap
                     setResult(SELECT_PHOTO)
                     finish()
@@ -110,38 +113,66 @@ class PictureChoiceActivity: AppCompatActivity(){
                     finish()
                 }
             }
-            PICK_FROM_CAMERA ->{
+            REQUEST_TAKE_PHOTO ->{
                 Log.e("PICK_FROM_CAMERA","!!yes!!")
-
-                // 인텐트가 null이 아닐 때
-                if(data != null){
-
-                    //해상도
-                    var myoption = BitmapFactory.Options()
-                    myoption.inSampleSize=1
-                    val mbitmap = BitmapFactory.decodeFile(data.data.toString(),myoption)
-
+                    val mbitmap = BitmapFactory.decodeFile(currentPhotoPath)
                     user.setphoto(mbitmap)
                     setResult(SELECT_PHOTO)
                     finish()
-                }else{
-                    finish()
-                }
-
-            }
-            else -> {
-                Toast.makeText(applicationContext,"취소되었습니다.",Toast.LENGTH_SHORT).show()
-                finish()
             }
         }
-
-
     }
+
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    Log.e("photofile_Path",currentPhotoPath)
+                    createImageFile()
+
+                } catch (ex: IOException) {
+                  null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        this,
+                        packageName,
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
+                }
+            }
+        }
+    }
+
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        Log.e("date",timeStamp)
+        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+            Log.e("path",currentPhotoPath)
+        }
+    }
+
 
     companion object{
         val PICK_FROM_ALBUM = 200
         val SELECT_PHOTO = 300
-        val PICK_FROM_CAMERA = 400
+        val REQUEST_TAKE_PHOTO = 400
     }
 
 }

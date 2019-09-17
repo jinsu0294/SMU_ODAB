@@ -71,6 +71,7 @@ class OdabAddActivity:AppCompatActivity(){
             PictureChoiceActivity.SELECT_PHOTO -> {
                 Log.e("IMAGE SET","!!yes!!")
                 ivPicture.setImageBitmap(user.photo)
+                ivPicture.rotation=90f
                 btnPictureAdd.visibility = View.GONE
             }
         }

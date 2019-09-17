@@ -6,5 +6,5 @@ import android.graphics.Picture
 class Odab(
     var title: String,
     var textContents:String,
-    var image: Bitmap?
+    var image: Bitmap
 )

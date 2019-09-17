@@ -17,7 +17,7 @@ class User: Application() {
 
     var quizlist = arrayListOf<Quiz>()
 
-    var photo: Bitmap? = null
+    lateinit var photo: Bitmap
 
     fun setPermission(permission:Boolean?){
         this.ispermission = permission
@@ -53,7 +53,7 @@ class User: Application() {
     }
 
     // odab list 추가
-    fun addodab(title:String, textcontents:String, image:Bitmap?){
+    fun addodab(title:String, textcontents:String, image:Bitmap){
         this.odablist.add(Odab(title, textcontents, image))
     }
 
