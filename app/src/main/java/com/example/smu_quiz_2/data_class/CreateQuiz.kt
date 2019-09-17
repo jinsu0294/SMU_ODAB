@@ -1,7 +1,6 @@
 package com.example.smu_quiz_2.data_class
 
-data class Quiz(
-    var quiz_id: Int,
+data class CreateQuiz(
     var email: String,
     var title: String,
     var text: String,
@@ -11,6 +10,5 @@ data class Quiz(
     var choice_4: String,
     var answer: Int,
     var explain: String,
-    var Management_id: Int,
-    var isChecked: Boolean
+    var Management_id: Int
 )

@@ -1,7 +1,6 @@
 package com.example.smu_quiz_2.data_class
 
-class Folder(
-    var id : Int,
+class CreateFolder(
     var title:String,
     var email:String
 )

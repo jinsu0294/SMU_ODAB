@@ -15,6 +15,12 @@ class OdabDetailActivity:AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_odab_detail)
 
+        // TODO:: 오답노트 조회
+        // @GET /folder/wrong/{pk}
+        // pk -> wrong_id(오답아이디)를 보내서 내용을 받아옵니다.
+        // wrong_id, image, title, text, email, Management_id
+        // title, image, text 를 뷰에 보여주면 됩니다.
+
         val user = application as User
 
         val position = intent.getIntExtra("position", -1)
@@ -24,6 +30,7 @@ class OdabDetailActivity:AppCompatActivity(){
             tvUserTextContents.text = user.odablist[position].textContents
 //            var mbitmap = user.odablist[position].image
             ivPictureDetail.setImageBitmap(user.odablist[position].image)
+            ivPictureDetail.rotation=90f
 
         }else{
             Toast.makeText(this,getString(R.string.error),Toast.LENGTH_SHORT).show()

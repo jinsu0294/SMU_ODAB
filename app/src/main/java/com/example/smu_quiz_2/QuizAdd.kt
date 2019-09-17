@@ -68,18 +68,25 @@ class QuizAdd :AppCompatActivity(){
             if(etUserQuizTitle.text.isEmpty()){
                 Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
             }else{  // 입력값이 있으면
+                val quiz_id = -1
+                val email = user.user.toString()
                 val title = etUserQuizTitle.text.toString()
-                val contents = etUserQuizContents.text.toString()
-                val quiz_1 = etUserQuiz_1.text.toString()
-                val quiz_2 = etUserQuiz_2.text.toString()
-                val quiz_3 = etUserQuiz_3.text.toString()
-                val quiz_4 = etUserQuiz_4.text.toString()
+                val text = etUserQuizContents.text.toString()
+                val choice_1 = etUserQuiz_1.text.toString()
+                val choice_2 = etUserQuiz_2.text.toString()
+                val choice_3 = etUserQuiz_3.text.toString()
+                val choice_4 = etUserQuiz_4.text.toString()
                 val answer = answer // answer는 스피너로 결정된 answer로 값이 결정 됨
-                val explanation = etUserQuizExplanation.text.toString()
+                val explain = etUserQuizExplanation.text.toString()
+                var Management_id = -1
                 var isChecked = false   // isChecked는 체크박스의 체크상태 의미( false == 선택X , true == 선택O )
 
+                // TODO:: 퀴즈 생성
+                // @POST /folder/problem
+                // quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer, explain, Management_id 를 넘겨줍니다.
+                // (quiz_id 는 빈 상태로 보냅니다.)
                 // user의 addQuiz()함수로 quizList에 저장
-                user.addQuiz(title,contents,quiz_1,quiz_2, quiz_3, quiz_4,answer,explanation,isChecked)
+                user.addQuiz(quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer,explain,Management_id,isChecked)
 
                 // QuizFolderActivity 액티비티로 전환하고 액티비티 종료( finish() )
                 val intent = Intent(this,QuizFolderActivity::class.java)

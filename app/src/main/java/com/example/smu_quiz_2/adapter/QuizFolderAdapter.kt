@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import com.example.smu_quiz_2.R
-import com.example.smu_quiz_2.data_class.Quiz
 import com.example.smu_quiz_2.QuizDetail
-import com.example.smu_quiz_2.User
+import com.example.smu_quiz_2.data_class.Quiz
 
 // 문제풀기 폴더 Adapter
 class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): androidx.recyclerview.widget.RecyclerView.Adapter<QuizFolderAdapter.Holder>(){
@@ -25,7 +24,7 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): an
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(quizList[position],context, position)
+        holder.bind(quizList[position],context, position)
     }
 
     class Holder(itemView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView){

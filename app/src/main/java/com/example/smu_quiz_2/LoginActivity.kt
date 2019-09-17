@@ -64,6 +64,11 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+
+                    // TODO:: 로그인 및 사용자 등록
+                    // @POST /user
+                    // email(이메일) 넘겨주기
+
                     Log.d(TAG, "signInWithCredential:success")
                     val intent = Intent(this,UserFolderActivity::class.java)
                     startActivity(intent)

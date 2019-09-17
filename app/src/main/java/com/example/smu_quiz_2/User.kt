@@ -2,7 +2,6 @@ package com.example.smu_quiz_2
 
 import android.app.Application
 import android.graphics.Bitmap
-import android.net.Uri
 import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.data_class.Odab
 import com.example.smu_quiz_2.data_class.Quiz
@@ -18,7 +17,7 @@ class User: Application() {
 
     var quizlist = arrayListOf<Quiz>()
 
-    var photo: Bitmap? = null
+    lateinit var photo: Bitmap
 
     fun setPermission(permission:Boolean?){
         this.ispermission = permission
@@ -42,19 +41,19 @@ class User: Application() {
 
     // folder list 추가
     fun add(folderTitle:String){
-        this.folderList.add(Folder(folderTitle))
+        this.folderList.add(Folder(-1,folderTitle,user.toString()))
     }
 
     fun getfolder():String?{
         var name:String? = null
         for (i in 0..folderList.size-1){
-            name = "${name} + ${folderList[i].folderTitle}"
+            name = "${name} + ${folderList[i].title}"
         }
         return name
     }
 
     // odab list 추가
-    fun addodab(title:String, textcontents:String, image:Bitmap?){
+    fun addodab(title:String, textcontents:String, image:Bitmap){
         this.odablist.add(Odab(title, textcontents, image))
     }
 
@@ -67,18 +66,23 @@ class User: Application() {
     }
 
     // quiz list 추가
-    fun addQuiz(title:String, contents:String, quiz_1:String, quiz_2:String, quiz_3:String, quiz_4:String, answer:Int, explanation:String, checkable:Boolean){
+    fun addQuiz(
+        quiz_id:Int, email:String, title:String, text:String, choice_1: String, choice_2: String, choice_3:String, choice_4:String, answer:Int, explain:String,
+        Management_id:Int, ischecked: Boolean){
         this.quizlist.add(
             Quiz(
+                quiz_id,
+                email,
                 title,
-                contents,
-                quiz_1,
-                quiz_2,
-                quiz_3,
-                quiz_4,
+                text,
+                choice_1,
+                choice_2,
+                choice_3,
+                choice_4,
                 answer,
-                explanation,
-                checkable
+                explain,
+                Management_id,
+                ischecked
             )
         )
     }

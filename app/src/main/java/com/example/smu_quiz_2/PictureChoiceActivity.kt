@@ -87,6 +87,7 @@ class PictureChoiceActivity: AppCompatActivity(){
                 Log.e("PICK_FROM_ALBUM","!!yes!!")
 
                 if(data?.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
+                    //사진 URI = photoUri
                     var photoUri = data.data
                     var cursor:Cursor?=null
 
@@ -102,7 +103,9 @@ class PictureChoiceActivity: AppCompatActivity(){
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
                     val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
+                    val mintent = Intent(this,OdabPaintActivity::class.java)
 
+                    mintent.putExtra("bitmap",tempfile.absolutePath)
                     user.photo = mbitmap
                     setResult(SELECT_PHOTO)
                     finish()

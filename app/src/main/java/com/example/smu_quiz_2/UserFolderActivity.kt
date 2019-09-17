@@ -14,28 +14,23 @@ class UserFolderActivity : AppCompatActivity(){
 
     private lateinit var auth: FirebaseAuth
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userfolder)
 
         //로그인 되어있는지 확인
         auth = FirebaseAuth.getInstance()
+
         if(auth.currentUser?.email==null){
             val intent=Intent(this,LoginActivity::class.java)
             startActivity(intent)
             finish()
-        }else{
-            //통신 :
-            // 사용자 검색을 해서 이미 등록되있는 사용자라면
-            // 로그인만 해주고
-            // 맨처음이라면 auth.currentUser!!.email 를 사용자 등록
         }
 
-        // 통신 : 이메일로 폴더조회
-        // 이메일 넘겨주면 이메일에 해당되는 폴더 다 보내줌
-        // 그걸 사용자 폴더에 다 저장 시켜주고 오답 어댑터에서 불러와주면 될듯
+        // TODO:: 이메일로 폴더 조회
+        // @GET /folder/search?email={이메일 주소}
+        // email(사용자 아이디) 보내서 폴더 리스트 받아오기
+        // 이 액티비티로 돌아올 때마다 받아온다.
 
         checkFolder()
 

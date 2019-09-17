@@ -36,6 +36,11 @@ class OdabFolderActivity:AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userfolder)
 
+        // TODO:: 오답노트조회
+        // @GET /folder/detail_wrong?Management_id=pk
+        // Management_id(폴더 아이디)를 넘겨서 오답노트 리스트를 받아옵니다.
+        // 액티비티로 돌아올 때마다 리스트를 불러옵니다.
+
         checkFolder()
 
         val user = application as User
