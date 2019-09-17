@@ -9,12 +9,12 @@ import retrofit2.http.*
 
 interface SmuOdabInterface {
     //이메일등록
-    @POST("/user")
-    fun setUser(@Body value: User): Flowable<User>
+    @POST("/user/")
+    fun setUser(@Body value: UserDataClass): Flowable<UserDataClass>
 
     //유저들이메일불러오기
     @GET("/user")
-    fun getUser(): Observable<List<User>>
+    fun getUser(): Observable<List<UserDataClass>>
 
     //폴더생성
     @POST("/folder/list")

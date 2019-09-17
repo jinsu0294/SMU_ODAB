@@ -1,9 +1,12 @@
 package com.example.smu_quiz_2
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.smu_quiz_2.data_class.UserDataClass
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -11,9 +14,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
+
+class LoginActivity:AppCompatActivity() {
+
+    private var smuOdabAPI = SmuOdabAPI()
+    private var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
+    private var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -58,7 +68,10 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
+    @SuppressLint("CheckResult")
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
+        val user = application as User
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
@@ -67,17 +80,50 @@ class LoginActivity : AppCompatActivity() {
 
                     // TODO:: 로그인 및 사용자 등록
                     // @POST /user
-                    // email(이메일) 넘겨주기
+                    val email = auth.currentUser?.email
+                    if (email != null) {
+                        user.setId(email)
+                    }
 
+                    smuOdabInterface.getUser()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ result ->
+                            Log.e("123123","secccee")
+                            Log.e("123123", "secccee${result.get(0).email}")
+                        }, { error ->
+                            error.printStackTrace()
+                            Toast.makeText(this, "오류", Toast.LENGTH_SHORT).show()
+                            Log.e("123123","false "+"getUser")
+                        }, {
+                            // 작업이 정상적으로 완료되지 않았을 때 호출됩니다.
+                            Log.d("Result", "complete")
+                        })
+
+                    smuOdabInterface.setUser(UserDataClass(user.getId().toString()))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ wrong ->
+                            Log.e("123123",wrong.toString())
+                            Log.e("123123","secccee")
+                        }, { error ->
+                            Log.e("123123","false "+user.getId().toString())
+                            error.printStackTrace()
+                        }, {
+                            Log.e("123123","complete")
+                            Log.d("UserDataClass", "complete::UserDataClass")
+                        })
                     Log.d(TAG, "signInWithCredential:success")
-                    val intent = Intent(this,UserFolderActivity::class.java)
+                    val intent = Intent(this, UserFolderActivity::class.java)
                     startActivity(intent)
                     finish()
+
                 } else {
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                 }
             }
     }
+
     private fun signInWithGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)

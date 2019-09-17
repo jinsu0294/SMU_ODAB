@@ -20,7 +20,6 @@ class UserFolderActivity : AppCompatActivity(){
 
         //로그인 되어있는지 확인
         auth = FirebaseAuth.getInstance()
-
         if(auth.currentUser?.email==null){
             val intent=Intent(this,LoginActivity::class.java)
             startActivity(intent)

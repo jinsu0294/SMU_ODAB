@@ -6,11 +6,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SmuOdabAPI {
 
-    fun smuQuizInfoRetrofit(): Retrofit {
+    fun smuInfoRetrofit(): Retrofit {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://test.com/")
+            .baseUrl("http://ec2-54-180-99-213.ap-northeast-2.compute.amazonaws.com:8000/")
             .build()
         return retrofit!!
     }
