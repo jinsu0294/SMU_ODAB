@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.example.smu_quiz_2.data_class.Odab
 import com.example.smu_quiz_2.OdabDetailActivity
 import com.example.smu_quiz_2.R
+import com.example.smu_quiz_2.data_class.WrongList
 
 
-class OdabFolderAdapter(val context: Context, val odablist: ArrayList<Odab>): RecyclerView.Adapter<OdabFolderAdapter.Holder>(){
+class OdabFolderAdapter(val context: Context, val odablist: ArrayList<WrongList>): RecyclerView.Adapter<OdabFolderAdapter.Holder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -29,7 +29,7 @@ class OdabFolderAdapter(val context: Context, val odablist: ArrayList<Odab>): Re
     }
 
     class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(odablist: Odab, context:Context, position: Int){
+        fun bind(odablist: WrongList, context:Context, position: Int){
             val title = itemView.findViewById<TextView>(R.id.tvOdabTitle)
             title.text = odablist.title
 

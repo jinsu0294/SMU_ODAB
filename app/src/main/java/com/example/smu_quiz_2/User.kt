@@ -2,9 +2,7 @@ package com.example.smu_quiz_2
 
 import android.app.Application
 import android.graphics.Bitmap
-import com.example.smu_quiz_2.data_class.Folder
-import com.example.smu_quiz_2.data_class.Odab
-import com.example.smu_quiz_2.data_class.Quiz
+import com.example.smu_quiz_2.data_class.*
 
 class User: Application() {
 
@@ -54,7 +52,7 @@ class User: Application() {
 
     // odab list 추가
     fun addodab(title:String, textcontents:String, image:Bitmap){
-        this.odablist.add(Odab(title, textcontents, image))
+//        this.odablist.add(Wrong(1,"123",image,title, textcontents, 8))
     }
 
     fun getodab():String?{

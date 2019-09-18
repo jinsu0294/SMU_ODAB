@@ -1,23 +1,27 @@
 package com.example.smu_quiz_2
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_odab_add.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.smu_quiz_2.data_class.CreateQuiz
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_quiz_add.*
-import kotlinx.android.synthetic.main.activity_quiz_add.btnSave
 
-class QuizAdd :AppCompatActivity(){
+class QuizAdd : AppCompatActivity() {
 
+    var smuOdabAPI = SmuOdabAPI()
+    var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
+    var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
+
+
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_add)
@@ -32,42 +36,53 @@ class QuizAdd :AppCompatActivity(){
         spinner.adapter = sAdapter
 
         // answer 초기값 -1
-        var answer:Int =  -1
+        var answer: Int = -1
 
         // 스피너 리스너
-        spinner.onItemSelectedListener = object: AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        spinner.onItemSelectedListener =
+            object : AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+                override fun onItemClick(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
 
-            }
+                }
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position){
-                    0 -> {
-                        answer = 1
-                    }
-                    1 -> {
-                        answer = 2
-                    }
-                    2 ->{
-                        answer = 3
-                    }
-                    3 ->{
-                        answer = 4
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (position) {
+                        0 -> {
+                            answer = 1
+                        }
+                        1 -> {
+                            answer = 2
+                        }
+                        2 -> {
+                            answer = 3
+                        }
+                        3 -> {
+                            answer = 4
+                        }
                     }
                 }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-        }
 
         btnSave.setOnClickListener {
             // 입력값이 비어있으면
-            if(etUserQuizTitle.text.isEmpty()){
-                Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
-            }else{  // 입력값이 있으면
+            if (etUserQuizTitle.text.isEmpty()) {
+                Toast.makeText(this, getString(R.string.nothing), Toast.LENGTH_SHORT).show()
+            } else {  // 입력값이 있으면
                 val quiz_id = -1
                 val email = user.user.toString()
                 val title = etUserQuizTitle.text.toString()
@@ -86,10 +101,29 @@ class QuizAdd :AppCompatActivity(){
                 // quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer, explain, Management_id 를 넘겨줍니다.
                 // (quiz_id 는 빈 상태로 보냅니다.)
                 // user의 addQuiz()함수로 quizList에 저장
-                user.addQuiz(quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer,explain,Management_id,isChecked)
 
+                var quiz = CreateQuiz(
+                    email,
+                    title,
+                    text,
+                    choice_1,
+                    choice_2,
+                    choice_3,
+                    choice_4,
+                    answer,
+                    explain,
+                    Management_id
+                )
+                smuOdabInterface.createQuiz(quiz)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ result ->
+                    }, { error ->
+                        error.printStackTrace()
+                    }, {
+                    })
                 // QuizFolderActivity 액티비티로 전환하고 액티비티 종료( finish() )
-                val intent = Intent(this,QuizFolderActivity::class.java)
+                val intent = Intent(this, QuizFolderActivity::class.java)
                 startActivity(intent)
                 setResult(Activity.RESULT_OK)
                 finish()

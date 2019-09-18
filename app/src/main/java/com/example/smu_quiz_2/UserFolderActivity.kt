@@ -44,9 +44,7 @@ class UserFolderActivity : AppCompatActivity() {
             // 상단 텍스트 뷰에 이메일 표시하기
             tvId.text = email
 
-            // TODO:: 이메일로 폴더 조회 getFolderList()
-            // 호출이 나중에 됨 돌아버림...ㅠ
-            // 근데 잘 받아오고 folderList 에도 잘 들어감
+            // TODO:: OK 이메일로 폴더 조회 getFolderList()
             smuOdabInterface.getFolderList(email)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

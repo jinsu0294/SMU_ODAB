@@ -29,15 +29,14 @@ class OdabDetailActivity:AppCompatActivity(){
         // title.text = result.text.toString()
         // text.text = result.text.toString()
 
-        val user = application as User
 
         val position = intent.getIntExtra("position", -1)
         Log.e("아이템 postion",position.toString())
         if(position != -1){
-            tvUserOdabTitle.text = user.odablist[position].title
+          /*  tvUserOdabTitle.text = user.odablist[position].title
             tvUserTextContents.text = user.odablist[position].textContents
 //            var mbitmap = user.odablist[position].image
-            ivPictureDetail.setImageBitmap(user.odablist[position].image)
+            ivPictureDetail.setImageBitmap(user.odablist[position].image)*/
             ivPictureDetail.rotation=90f
 
         }else{

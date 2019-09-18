@@ -10,9 +10,10 @@ import android.widget.TextView
 import com.example.smu_quiz_2.R
 import com.example.smu_quiz_2.QuizDetail
 import com.example.smu_quiz_2.data_class.Quiz
+import com.example.smu_quiz_2.data_class.QuizList
 
 // 문제풀기 폴더 Adapter
-class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): androidx.recyclerview.widget.RecyclerView.Adapter<QuizFolderAdapter.Holder>(){
+class QuizFolderAdapter(var context: Context, var quizList: ArrayList<QuizList>): androidx.recyclerview.widget.RecyclerView.Adapter<QuizFolderAdapter.Holder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.quiz_folder_item,parent,false)
@@ -28,7 +29,7 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<Quiz>): an
     }
 
     class Holder(itemView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView){
-        fun bind(quizList: Quiz, context: Context, position: Int){
+        fun bind(quizList: QuizList, context: Context, position: Int){
 
             var quizTitle = itemView.findViewById<TextView>(R.id.tvQuizTitle)
             var checkbox=itemView.findViewById<CheckBox>(R.id.checkbox)

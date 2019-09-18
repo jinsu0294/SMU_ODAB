@@ -32,7 +32,7 @@ interface SmuOdabInterface {
     fun deleteFolder(@Path("id") id: String)
 
     //퀴즈생성
-    @POST("/folder/problem")
+    @POST("/folder/problem/")
     fun createQuiz(@Body value: CreateQuiz): Observable<CreateQuiz>
 
     //퀴즈삭제

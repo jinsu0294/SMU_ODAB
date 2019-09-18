@@ -50,11 +50,8 @@ class OdabAddActivity:AppCompatActivity(){
                 // text -> etUserOdabTextContents.text.toString()
                 // Maagement_id -> 아마 유저폴더에서 리사이클러뷰에 나타난 아이템 클릭했을 때 저장되는 id로 하면 될 것 같아요.
 
-
-                val user = application as User
                 val intent = Intent(this, OdabFolderActivity::class.java)
                 // user - odab list 추가(title, contents)
-                user.addodab(etUserOdabTitle.text.toString(), etUserOdabTextContents.text.toString(),user.photo)
                 startActivityForResult(intent, BUTTON_SAVE)
             }
         }
