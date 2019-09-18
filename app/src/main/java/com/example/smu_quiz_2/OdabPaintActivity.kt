@@ -27,9 +27,10 @@ class OdabPaintActivity : AppCompatActivity() {
 
         var myoption = BitmapFactory.Options()
         myoption.inSampleSize=1
-//        val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
+        var path = intent.getStringExtra("path")
+        val mbitmap = BitmapFactory.decodeFile(path,myoption)
 
-        var mbitmap = user.odablist[position].image
+        //var mbitmap = user.odablist[position].image
         var newbitmap = mbitmap.copy(Bitmap.Config.ARGB_4444, true)
         var canvas = Canvas(newbitmap)
         canvas.drawBitmap(newbitmap, 0f, 0f, paint)

@@ -55,11 +55,18 @@ class OdabAddActivity:AppCompatActivity(){
                 startActivityForResult(intent, BUTTON_SAVE)
             }
         }
-
+        //여기서 사진 권한 물어봐야할것 같은디
+        var permission = Permission(this)
+        val isPer = user.getPermission()
         // 사진 추가 버튼 리스너
         btnPictureAdd.setOnClickListener {
-            val intent = Intent(this,PictureChoiceActivity::class.java)
-            startActivityForResult(intent, ADD_PICTURE)
+            permission.checkPer()
+            if(isPer == true){
+                val intent = Intent(this,PictureChoiceActivity::class.java)
+                startActivityForResult(intent, ADD_PICTURE)
+            }else{ // 권한 거부
+                disagree()
+            }
         }
 
     }
@@ -94,6 +101,11 @@ class OdabAddActivity:AppCompatActivity(){
     companion object{
         val BUTTON_SAVE = 900
         val ADD_PICTURE = 500
+    }
+    private fun disagree(){
+        Log.e("disagree()","!!yes!!")
+
+        Toast.makeText(this,"권한이 거부되었습니다.",Toast.LENGTH_SHORT).show()
     }
 
 
