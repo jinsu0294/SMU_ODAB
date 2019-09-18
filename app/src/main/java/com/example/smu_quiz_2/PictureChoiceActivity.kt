@@ -76,7 +76,6 @@ class PictureChoiceActivity: AppCompatActivity(){
                 disagree()
             }
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -150,7 +149,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         }
     }
 
-
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
@@ -167,8 +165,6 @@ class PictureChoiceActivity: AppCompatActivity(){
             Log.e("path",currentPhotoPath)
         }
     }
-
-
     companion object{
         val PICK_FROM_ALBUM = 200
         val SELECT_PHOTO = 300
