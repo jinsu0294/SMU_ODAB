@@ -25,14 +25,6 @@ class PictureChoiceActivity: AppCompatActivity(){
     var currentPhotoPath = ""
 
 
-    // 권한이 거부되었습니다 토스트메시지 띄우는 함수
-    private fun disagree(){
-        Log.e("disagree()","!!yes!!")
-
-        Toast.makeText(this,"권한이 거부되었습니다.",Toast.LENGTH_SHORT).show()
-    }
-
-
     // 앨범에서 이미지 선택
      private fun goToAlbum(){
         Log.e("GoToAlb]um","!!yes!!")
@@ -49,8 +41,7 @@ class PictureChoiceActivity: AppCompatActivity(){
         val user = application as User
 
         // 사용자 권한 요청
-        var permission = Permission(this)
-        permission.checkPer()
+
 
         val pref = PreferenceManager.getDefaultSharedPreferences(this)  // 쉐어프리퍼런스 선언
         val result = pref.getBoolean("isPermission", false)     // 사용자 권한 결과 가져옴
@@ -59,24 +50,14 @@ class PictureChoiceActivity: AppCompatActivity(){
 
         // 앨범 버튼 리스너
         btnGetPicture.setOnClickListener {
-            if (isPer==true) {  // 사용자가 권한 허락
                 goToAlbum()
-            }else{  // 사용자 권한 거부
-                disagree()
-            }
         }
         // 촬영 버튼 리스너
         btnTakePicture.setOnClickListener {
-            // 사용자가 권한 허락
-            if(isPer == true){
-                // 카메라 호출
+
                 dispatchTakePictureIntent()
 
-            }else{ // 권한 거부
-                disagree()
-            }
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -104,8 +85,7 @@ class PictureChoiceActivity: AppCompatActivity(){
                     myoption.inSampleSize=1
                     val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
                     val mintent = Intent(this,OdabPaintActivity::class.java)
-
-                    mintent.putExtra("bitmap",tempfile.absolutePath)
+                    mintent.putExtra("path",tempfile.absolutePath)
                     user.photo = mbitmap
                     setResult(SELECT_PHOTO)
                     finish()
@@ -116,6 +96,8 @@ class PictureChoiceActivity: AppCompatActivity(){
             REQUEST_TAKE_PHOTO ->{
                 Log.e("PICK_FROM_CAMERA","!!yes!!")
                     val mbitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                    val mintent = Intent(this,OdabPaintActivity::class.java)
+                    mintent.putExtra("path",currentPhotoPath)
                     user.setphoto(mbitmap)
                     setResult(SELECT_PHOTO)
                     finish()
@@ -150,7 +132,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         }
     }
 
-
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
@@ -167,8 +148,6 @@ class PictureChoiceActivity: AppCompatActivity(){
             Log.e("path",currentPhotoPath)
         }
     }
-
-
     companion object{
         val PICK_FROM_ALBUM = 200
         val SELECT_PHOTO = 300
