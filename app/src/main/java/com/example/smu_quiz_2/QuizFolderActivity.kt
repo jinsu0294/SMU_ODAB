@@ -12,6 +12,12 @@ import kotlinx.android.synthetic.main.activity_quiz_folder.*
 
 class QuizFolderActivity:AppCompatActivity(){
 
+    var smuOdabAPI = SmuOdabAPI()
+    var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
+    var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
+
+
+    // 뷰 처리하는 코드 빼고 없애도 될 듯(통신 되면)
     // 폴더가 있는지 없는지 확인하는 함수
     fun checkFolder(){
 
@@ -36,15 +42,14 @@ class QuizFolderActivity:AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_folder)
 
-        // TODO:: 퀴즈 상세 조회(API문서상)( 실상은 퀴즈 리스트 조회입니다)
-        // @GET /folder/detail_quiz?Management_id={Management_id}
+        // TODO:: 퀴즈 리스트조회 getQuizList()
         // Management_id (폴더 아이디)를 보내서 퀴즈 폴더 리스트를 받아옵니다.
         // quiz_id, title, Management_id 가 옵니다.
         // title 만 리스트에 보여주면 됩니다.
         // 액티비티가 호출될 때마다 불러옵니다.
 
         // 폴더 있는지 없는지 확인 함수 호출
-        checkFolder()
+//        checkFolder()
 
 
 

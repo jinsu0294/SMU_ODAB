@@ -18,12 +18,12 @@ interface SmuOdabInterface {
 
     //폴더생성
     @POST("/folder/list")
-    fun createFolder(@Body value: CreateFolder)
+    fun createFolder(@Body value: CreateFolder): Observable<CreateFolder>
 
     //폴더조회 x
     //폴더리스트조회 - 이메일로
     @GET("/folder/search")
-    fun getForderList(@Query("email") email: String): Observable<FolderList>
+    fun getFolderList(@Query("email") email: String?): Observable<List<FolderList>>
 
 
     //폴더삭제
@@ -33,7 +33,7 @@ interface SmuOdabInterface {
 
     //퀴즈생성
     @POST("/folder/problem")
-    fun createQuiz(@Body value: CreateQuiz): Flowable<Quiz>
+    fun createQuiz(@Body value: CreateQuiz): Observable<CreateQuiz>
 
     //퀴즈삭제
     @FormUrlEncoded
@@ -42,7 +42,7 @@ interface SmuOdabInterface {
 
     //퀴즈 리스트조회
     @GET("/folder/wrong/detail_quiz")
-    fun getQuizList(@Query("Management_id") forder_id: Int): Observable<QuizList>
+    fun getQuizList(@Query("Management_id") forder_id: Int): Observable<List<QuizList>>
 
     //퀴즈상세조회
     @GET("/folder/manage")
@@ -56,11 +56,11 @@ interface SmuOdabInterface {
 
     //오답노트생성
     @POST("/folder/wrong")
-    fun createWrong(@Body value: CreateWrong)
+    fun createWrong(@Body value: CreateWrong): Observable<CreateWrong>
 
     //오답노트 리스트조회
     @GET("/folder/wrong/detail_wrong")
-    fun getWrongList(@Query("Management_id") forder_id: Int): Observable<WrongList>
+    fun getWrongList(@Query("Management_id") forder_id: Int): Observable<List<WrongList>>
 
     //오답노트상세조회
     @GET("/folder/wrong/{wrong_id}")

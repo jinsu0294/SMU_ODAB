@@ -11,15 +11,23 @@ import kotlinx.android.synthetic.main.activity_odab_add.*
 import kotlinx.android.synthetic.main.activity_odab_detail.*
 
 class OdabDetailActivity:AppCompatActivity(){
+
+    var smuOdabAPI = SmuOdabAPI()
+    var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
+    var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_odab_detail)
 
-        // TODO:: 오답노트 조회
-        // @GET /folder/wrong/{pk}
-        // pk -> wrong_id(오답아이디)를 보내서 내용을 받아옵니다.
+        // TODO:: 오답노트상세조회 getQuiz()
+        // wrong_id(오답아이디)를 보내서 내용을 받아옵니다.
+        // 오답아이디는 오답리스트에서 선택한 아이템을 이용하여 받아오면 될 듯
         // wrong_id, image, title, text, email, Management_id
         // title, image, text 를 뷰에 보여주면 됩니다.
+        // title.text = result.text.toString()
+        // text.text = result.text.toString()
 
         val user = application as User
 

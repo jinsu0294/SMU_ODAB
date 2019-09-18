@@ -13,16 +13,27 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_odab_add.*
 import java.io.File
 
 class OdabAddActivity:AppCompatActivity(){
+
+    private lateinit var auth: FirebaseAuth
+    var smuOdabAPI = SmuOdabAPI()
+    var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
+    var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_odab_add)
 
         val user = application as User
+        // 사용자 이메일 받아오기
+        auth = FirebaseAuth.getInstance()
+        val email =  auth.currentUser!!.email.toString()
+
 
         // 저장 버튼 리스너
         btnSave.setOnClickListener {
@@ -31,9 +42,14 @@ class OdabAddActivity:AppCompatActivity(){
                 Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
             }else{  // 입력값이 모두 있는 경우
 
-                // TODO:: 오답노트생성
-                // @POST /folder/wrong
+                // TODO:: 오답노트생성 createWrong()
                 // email(이메일), image(이미지), title(오답제목), text(오답설명), Management_id(폴더아이디) 를 보냅니다.
+                // email은 위에서 선언한 email 갖다 쓰면 되고
+                // image는 모르겠고..
+                // title -> etUserOdabTitle.text.toString()
+                // text -> etUserOdabTextContents.text.toString()
+                // Maagement_id -> 아마 유저폴더에서 리사이클러뷰에 나타난 아이템 클릭했을 때 저장되는 id로 하면 될 것 같아요.
+
 
                 val user = application as User
                 val intent = Intent(this, OdabFolderActivity::class.java)

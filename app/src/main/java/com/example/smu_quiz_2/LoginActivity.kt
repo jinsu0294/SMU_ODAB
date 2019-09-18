@@ -78,27 +78,12 @@ class LoginActivity:AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    // TODO:: 로그인 및 사용자 등록
+                    // TODO:: 로그인 및 사용자 등록 setUser()
                     // @POST /user
                     val email = auth.currentUser?.email
                     if (email != null) {
                         user.setId(email)
                     }
-
-                    smuOdabInterface.getUser()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ result ->
-                            Log.e("123123","secccee")
-                            Log.e("123123", "secccee${result.get(0).email}")
-                        }, { error ->
-                            error.printStackTrace()
-                            Toast.makeText(this, "오류", Toast.LENGTH_SHORT).show()
-                            Log.e("123123","false "+"getUser")
-                        }, {
-                            // 작업이 정상적으로 완료되지 않았을 때 호출됩니다.
-                            Log.d("Result", "complete")
-                        })
 
                     smuOdabInterface.setUser(UserDataClass(user.getId().toString()))
                         .subscribeOn(Schedulers.io())

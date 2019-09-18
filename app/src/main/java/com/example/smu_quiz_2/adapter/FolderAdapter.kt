@@ -12,9 +12,10 @@ import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.OdabFolderActivity
 import com.example.smu_quiz_2.QuizFolderActivity
 import com.example.smu_quiz_2.R
+import com.example.smu_quiz_2.data_class.FolderList
 
 
-class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): RecyclerView.Adapter<FolderAdapter.Holder>(){
+class FolderAdapter(val context: Context, val folderList: ArrayList<FolderList>): RecyclerView.Adapter<FolderAdapter.Holder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -30,10 +31,11 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<Folder>): Re
     }
 
     class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(folderList: Folder, context:Context){
-            val folderName = itemView.findViewById<TextView>(R.id.tvFolderName)
-            val odab=itemView.findViewById<Button>(R.id.btnOdab)
-            val quiz = itemView.findViewById<Button>(R.id.btnQuiz)
+        val folderName = itemView.findViewById<TextView>(R.id.tvFolderName)
+        val odab=itemView.findViewById<Button>(R.id.btnOdab)
+        val quiz = itemView.findViewById<Button>(R.id.btnQuiz)
+
+        fun bind(folderList: FolderList, context:Context){
             folderName.text = folderList.title
 
             // 오답 버튼 리스너

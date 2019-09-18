@@ -41,7 +41,7 @@ class SplashActivity:AppCompatActivity(){
 
         auth = FirebaseAuth.getInstance()
 
-        currentUser = auth.currentUser.toString()
+        currentUser = auth.currentUser?.email.toString()
 
         var handler = Handler()
 
