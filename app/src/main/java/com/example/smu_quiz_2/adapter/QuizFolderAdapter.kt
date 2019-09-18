@@ -42,6 +42,7 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<QuizList>)
             // 아이템 클릭 리스너
             itemView.setOnClickListener {
                 val intent = Intent(context, QuizDetail::class.java)
+                intent.putExtra("quiz_id",quizList.quiz_id)
                 intent.putExtra("position", position)
                 itemView.context.startActivity(intent)
             }

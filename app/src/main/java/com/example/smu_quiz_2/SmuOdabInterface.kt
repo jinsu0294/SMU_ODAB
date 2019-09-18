@@ -42,11 +42,11 @@ interface SmuOdabInterface {
 
     //퀴즈 리스트조회
     @GET("/folder/detail_quiz")
-    fun getQuizList(@Query("Management_id") Management_id: String?): Observable<List<QuizList>>
+    fun getQuizList(@Query("Management_id") Management_id: Int?): Observable<List<QuizList>>
 
     //퀴즈상세조회
-    @GET("/folder/manage")
-    fun getQuiz(@Query("Management_id") quizId: Int): Observable<Quiz>
+    @GET("/folder/select")
+    fun getQuiz(@Query("quiz_id") quiz_id: String?): Observable<List<Quiz>>
 
     //문제리스트선택해서 풀기
     //quiz_id=1

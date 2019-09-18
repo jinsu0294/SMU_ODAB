@@ -70,7 +70,6 @@ class User: Application() {
         this.quizlist.add(
             Quiz(
                 quiz_id,
-                email,
                 title,
                 text,
                 choice_1,
@@ -79,8 +78,8 @@ class User: Application() {
                 choice_4,
                 answer,
                 explain,
-                Management_id,
-                ischecked
+                email,
+                Management_id
             )
         )
     }

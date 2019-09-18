@@ -78,7 +78,7 @@ class LoginActivity:AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    // TODO:: 로그인 및 사용자 등록 setUser() @POST /user
+                    // TODO:: OK 로그인 및 사용자 등록 setUser() @POST /user
                     val email = auth.currentUser?.email
                     if (email != null) {
                         user.setId(email)

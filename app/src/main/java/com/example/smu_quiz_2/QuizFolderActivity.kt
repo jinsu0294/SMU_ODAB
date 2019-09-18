@@ -54,7 +54,7 @@ class QuizFolderActivity : AppCompatActivity() {
         // Management_id (폴더 아이디)를 보내서 퀴즈 폴더 리스트를 받아옵니다.
         // quiz_id, title, Management_id 가 옵니다.
         // title 만 리스트에 보여주면 됩니다.
-        smuOdabInterface.getQuizList(Management_id.toString())
+        smuOdabInterface.getQuizList(Management_id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->

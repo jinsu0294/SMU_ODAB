@@ -95,7 +95,7 @@ class QuizAdd : AppCompatActivity() {
                 var Management_id = intent.getIntExtra("Management_id",0)
                 var isChecked = false   // isChecked는 체크박스의 체크상태 의미( false == 선택X , true == 선택O )
 
-                // TODO:: 퀴즈 생성
+                // TODO:: OK 퀴즈 생성
                 // @POST /folder/problem
                 // quiz_id, email, title, text, choice_1, choice_2, choice_3, choice_4, answer, explain, Management_id 를 넘겨줍니다.
                 // (quiz_id 는 빈 상태로 보냅니다.)
