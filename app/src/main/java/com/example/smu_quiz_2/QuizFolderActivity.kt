@@ -47,10 +47,10 @@ class QuizFolderActivity : AppCompatActivity() {
         )
         Log.e("123123", "Management_id_QuizFolderActivity_" + Management_id)
 
-        quizlist.add(QuizList(1, "title", 2))
+        quizlist.add(QuizList(1, "title", 2,true))
         var mAdapter = QuizFolderAdapter(this, quizlist)
 
-        // TODO:: 퀴즈 리스트조회 getQuizList
+        // TODO:: OK 퀴즈 리스트조회 getQuizList
         // Management_id (폴더 아이디)를 보내서 퀴즈 폴더 리스트를 받아옵니다.
         // quiz_id, title, Management_id 가 옵니다.
         // title 만 리스트에 보여주면 됩니다.
@@ -92,12 +92,13 @@ class QuizFolderActivity : AppCompatActivity() {
             if (click == -1) {
                 click = 0
                 for (i in 0..quizlist.size - 1) {
-//              TODO      mAdapter.quizList[i].isChecked = true   // 체크박스 선택(O)
+                    mAdapter.quizList[i].isChecked = true   // 체크박스 선택(O)
                 }
             } else {  // 짝수 번 클릭했을 때
                 click = -1
                 for (i in 0..quizlist.size - 1) {
-//               TODO     mAdapter.quizList[i].isChecked = false  // 체크박스 선택(X)
+                    mAdapter.quizList[i].isChecked = false  // 체크박스 선택(X)
+
                 }
 
             }
