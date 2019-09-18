@@ -37,7 +37,7 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<QuizList>)
             // quiz_folder_item 에서 아이디가 tvQuizTitle인 TextView (= quizTitle)의 text를 넘어온 quizList의 title로 설정
             quizTitle.text = quizList.title
             // quiz_folder_item 에서 아이디가 checkbox인 CheckBox (= checkbos)의 isChecked 속성을 false로 설정
-            checkbox.isChecked = quizList.isChecked
+// TODO           checkbox.isChecked = quizList.isChecked
 
             // 아이템 클릭 리스너
             itemView.setOnClickListener {
