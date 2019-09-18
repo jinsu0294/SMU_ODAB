@@ -1,5 +1,6 @@
 package com.example.smu_quiz_2
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +22,7 @@ class FolderAddActivity:AppCompatActivity(){
     var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
     var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
 
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_folder_add)
@@ -37,17 +39,14 @@ class FolderAddActivity:AppCompatActivity(){
             }else{  // 입력값이 모두 있을 때
                 val folderTitle = etUserFolderTitle.text.toString()
 
-                // TODO:: 폴더생성 createFolder()
+                // TODO:: OK 폴더생성 createFolder()
                 smuOdabInterface.createFolder(CreateFolder(folderTitle, email))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ result->
-                        Log.e("folderListSize",result.title)
                     }, { error ->
-                        Log.e("123123","false")
                         error.printStackTrace()
                     }, {
-                        Log.e("123123","complete")
                     })
 
                 val intent = Intent(this,UserFolderActivity::class.java)

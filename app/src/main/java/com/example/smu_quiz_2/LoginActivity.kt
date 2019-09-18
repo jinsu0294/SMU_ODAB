@@ -78,8 +78,7 @@ class LoginActivity:AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    // TODO:: 로그인 및 사용자 등록 setUser()
-                    // @POST /user
+                    // TODO:: 로그인 및 사용자 등록 setUser() @POST /user
                     val email = auth.currentUser?.email
                     if (email != null) {
                         user.setId(email)
@@ -90,12 +89,10 @@ class LoginActivity:AppCompatActivity() {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ wrong ->
                             Log.e("123123",wrong.toString())
-                            Log.e("123123","secccee")
                         }, { error ->
                             Log.e("123123","false "+user.getId().toString())
                             error.printStackTrace()
                         }, {
-                            Log.e("123123","complete")
                             Log.d("UserDataClass", "complete::UserDataClass")
                         })
                     Log.d(TAG, "signInWithCredential:success")
