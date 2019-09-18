@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smu_quiz_2.data_class.CreateQuiz
+import com.google.firebase.auth.FirebaseAuth
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_quiz_add.*
@@ -25,8 +27,6 @@ class QuizAdd : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_add)
-
-        val user = application as User
 
         // 스피너에 보여줄 리스트 (1,2,3,4)
         val choice = resources.getStringArray(R.array.choice_array)
@@ -83,8 +83,7 @@ class QuizAdd : AppCompatActivity() {
             if (etUserQuizTitle.text.isEmpty()) {
                 Toast.makeText(this, getString(R.string.nothing), Toast.LENGTH_SHORT).show()
             } else {  // 입력값이 있으면
-                val quiz_id = -1
-                val email = user.user.toString()
+                val email = FirebaseAuth.getInstance().currentUser!!.email.toString()
                 val title = etUserQuizTitle.text.toString()
                 val text = etUserQuizContents.text.toString()
                 val choice_1 = etUserQuiz_1.text.toString()
@@ -93,7 +92,7 @@ class QuizAdd : AppCompatActivity() {
                 val choice_4 = etUserQuiz_4.text.toString()
                 val answer = answer // answer는 스피너로 결정된 answer로 값이 결정 됨
                 val explain = etUserQuizExplanation.text.toString()
-                var Management_id = -1
+                var Management_id = intent.getIntExtra("Management_id",0)
                 var isChecked = false   // isChecked는 체크박스의 체크상태 의미( false == 선택X , true == 선택O )
 
                 // TODO:: 퀴즈 생성
@@ -124,6 +123,7 @@ class QuizAdd : AppCompatActivity() {
                     })
                 // QuizFolderActivity 액티비티로 전환하고 액티비티 종료( finish() )
                 val intent = Intent(this, QuizFolderActivity::class.java)
+                intent.putExtra("Management_id",Management_id)
                 startActivity(intent)
                 setResult(Activity.RESULT_OK)
                 finish()

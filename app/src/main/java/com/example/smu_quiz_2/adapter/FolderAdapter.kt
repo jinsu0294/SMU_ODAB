@@ -2,6 +2,7 @@ package com.example.smu_quiz_2.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -41,14 +42,14 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<FolderList>)
             // 오답 버튼 리스너
             odab.setOnClickListener {
                 val intent = Intent(context, OdabFolderActivity::class.java)
-                intent.getIntExtra("Management_id",adapterPosition)
+                intent.putExtra("Management_id",folderList.id)
                 itemView.context.startActivity(intent)
             }
 
             // 문제 풀기 리스너
             quiz.setOnClickListener {
                 val intent = Intent(context, QuizFolderActivity::class.java)
-                intent.getIntExtra("Management_id",adapterPosition)
+                intent.putExtra("Management_id",folderList.id)
                 itemView.context.startActivity(intent)
             }
         }

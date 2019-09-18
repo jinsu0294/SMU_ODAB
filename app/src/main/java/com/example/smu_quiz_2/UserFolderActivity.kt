@@ -32,11 +32,9 @@ class UserFolderActivity : AppCompatActivity() {
         setContentView(R.layout.activity_userfolder)
 
         // 사용자 이메일 받아오기
-        auth = FirebaseAuth.getInstance()
-        email = auth.currentUser!!.email.toString()
-
+        email = FirebaseAuth.getInstance().currentUser!!.email.toString()
         //로그인 되어있는지 확인
-        if (auth.currentUser?.email == null) {  // 사용자 아이디가 없으면 LoginActivity 로 가기
+        if (FirebaseAuth.getInstance().currentUser?.email == null) {  // 사용자 아이디가 없으면 LoginActivity 로 가기
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
@@ -62,7 +60,6 @@ class UserFolderActivity : AppCompatActivity() {
                     // 레아아웃 매니저 절성
                     rvFolderRecyclerview.layoutManager =
                         androidx.recyclerview.widget.LinearLayoutManager(this)
-
                     Log.e("folderListSize", folderList.size.toString())
                 }, { error ->
                     Log.e("123123", "false")

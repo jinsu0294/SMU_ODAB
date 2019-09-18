@@ -42,34 +42,34 @@ class QuizFolderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_folder)
-        var Management_id = intent.getIntExtra("Management_id", 0)
-        quizlist.add(QuizList(1,"title",2,true))
+        val Management_id = intent.getIntExtra(
+            "Management_id", 0
+        )
+        Log.e("123123", "Management_id_QuizFolderActivity_" + Management_id)
+
+        quizlist.add(QuizList(1, "title", 2,true))
         var mAdapter = QuizFolderAdapter(this, quizlist)
 
-        // TODO:: 퀴즈 리스트조회 getQuizList
+        // TODO:: OK 퀴즈 리스트조회 getQuizList
         // Management_id (폴더 아이디)를 보내서 퀴즈 폴더 리스트를 받아옵니다.
         // quiz_id, title, Management_id 가 옵니다.
         // title 만 리스트에 보여주면 됩니다.
-        smuOdabInterface.getQuizList(Management_id)
+        smuOdabInterface.getQuizList(Management_id.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list ->
+                Log.e("folderListSize", list.size.toString())
                 quizlist.clear()
-                for (i in 0..list.size)
-                    quizlist[i] = list[i]
+                for (i in 0 until list.size)
+                    quizlist.add(list[i])
                 mAdapter = QuizFolderAdapter(this, quizlist)
                 rvQuizRecyclerView.adapter = mAdapter
-
                 // 레아아웃 매니저 설정
                 rvQuizRecyclerView.layoutManager = LinearLayoutManager(this)
                 rvQuizRecyclerView.setHasFixedSize(true)
-
-                Log.e("folderListSize", list.size.toString())
             }, { error ->
-                Log.e("123123", "false")
                 error.printStackTrace()
             }, {
-                Log.e("123123", "complete")
             })
 
         // 폴더 있는지 없는지 확인 함수 호출
@@ -79,6 +79,8 @@ class QuizFolderActivity : AppCompatActivity() {
         btnAdd.setOnClickListener {
             // QuizAdd 액티비티로 이동
             val intent = Intent(this, QuizAdd::class.java)
+            intent.putExtra("Management_id", Management_id)
+            Log.e("123123", "Management_id" + Management_id)
             startActivityForResult(intent, 300)
         }
 
@@ -96,6 +98,7 @@ class QuizFolderActivity : AppCompatActivity() {
                 click = -1
                 for (i in 0..quizlist.size - 1) {
                     mAdapter.quizList[i].isChecked = false  // 체크박스 선택(X)
+
                 }
 
             }

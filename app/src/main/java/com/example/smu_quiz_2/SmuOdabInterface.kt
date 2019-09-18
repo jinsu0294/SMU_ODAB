@@ -41,8 +41,8 @@ interface SmuOdabInterface {
     fun deleteQuiz(@Path("quiz_id") id: String)
 
     //퀴즈 리스트조회
-    @GET("/folder/wrong/detail_quiz")
-    fun getQuizList(@Query("Management_id") forder_id: Int): Observable<List<QuizList>>
+    @GET("/folder/detail_quiz")
+    fun getQuizList(@Query("Management_id") Management_id: String?): Observable<List<QuizList>>
 
     //퀴즈상세조회
     @GET("/folder/manage")
