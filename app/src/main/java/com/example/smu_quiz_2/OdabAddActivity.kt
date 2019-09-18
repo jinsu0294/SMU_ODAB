@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
@@ -57,7 +58,10 @@ class OdabAddActivity:AppCompatActivity(){
         }
         //여기서 사진 권한 물어봐야할것 같은디
         var permission = Permission(this)
-        val isPer = user.getPermission()
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)  // 쉐어프리퍼런스 선언
+        val result = pref.getBoolean("isPermission", false)     // 사용자 권한 결과 가져옴
+        user.setPermission(result)  // user에 저장
+        val isPer = user.getPermission()    // user에 저장된 사용자 권한의 결과를 isPer 변수로 사용
         // 사진 추가 버튼 리스너
         btnPictureAdd.setOnClickListener {
             permission.checkPer()
