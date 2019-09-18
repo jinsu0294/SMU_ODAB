@@ -30,11 +30,11 @@ class UserFolderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userfolder)
-
+        auth = FirebaseAuth.getInstance()
         // 사용자 이메일 받아오기
-        email = FirebaseAuth.getInstance().currentUser!!.email.toString()
+        email = auth.currentUser?.email
         //로그인 되어있는지 확인
-        if (FirebaseAuth.getInstance().currentUser?.email == null) {  // 사용자 아이디가 없으면 LoginActivity 로 가기
+        if (email == null) {  // 사용자 아이디가 없으면 LoginActivity 로 가기
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
