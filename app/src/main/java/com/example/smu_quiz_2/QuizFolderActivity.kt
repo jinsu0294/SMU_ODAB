@@ -21,6 +21,8 @@ class QuizFolderActivity : AppCompatActivity() {
     var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
     var quizlist = arrayListOf<QuizList>()
 
+    val quizId: ArrayList<Int> = arrayListOf<Int>()
+
     // 뷰 처리하는 코드 빼고 없애도 될 듯(통신 되면)
     // 폴더가 있는지 없는지 확인하는 함수
     fun checkFolder(mAdapter: QuizFolderAdapter) {
@@ -47,7 +49,7 @@ class QuizFolderActivity : AppCompatActivity() {
         )
         Log.e("123123", "Management_id_QuizFolderActivity_" + Management_id)
 
-        quizlist.add(QuizList(1, "title", 2,true))
+        quizlist.add(QuizList(1, "title", 2, true))
         var mAdapter = QuizFolderAdapter(this, quizlist)
 
         // TODO:: OK 퀴즈 리스트조회 getQuizList
@@ -98,14 +100,30 @@ class QuizFolderActivity : AppCompatActivity() {
                 click = -1
                 for (i in 0..quizlist.size - 1) {
                     mAdapter.quizList[i].isChecked = false  // 체크박스 선택(X)
-
                 }
-
             }
             // 바뀐 quizlist를 adpater로 넘기고 다시 adapter설정함 -> 이렇게 하면 checkBox 전체가 선택되고 해제됨
             val mAdapter = QuizFolderAdapter(this, quizlist)
             rvQuizRecyclerView.adapter = mAdapter
-
+        }
+        btnSolve.setOnClickListener {
+            quizId.clear()
+            for (i in 0..quizlist.size - 1) {
+                if (mAdapter.quizList[i].isChecked) {
+                    quizId.add(mAdapter.quizList[i].quiz_id!!)
+                }
+            }
+            smuOdabInterface.getSelectQuizList(quizId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ quiz ->
+                    for (i in quiz)
+                        Log.e("123123", quiz.toString())
+                    //TODO :: select qyiz list 받아옴. 이것들로 문제 풀어보기 가능하
+                }, { error ->
+                    error.printStackTrace()
+                }, {
+                })
         }
 
 
