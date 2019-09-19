@@ -51,8 +51,8 @@ interface SmuOdabInterface {
     //문제리스트선택해서 풀기
     //quiz_id=1
     @GET("/folder/select")
-    fun getSelectQuizList(@QueryMap option: Map<String, Int>): Observable<Quiz>
-
+    fun getSelectQuizList(@Query ("quiz_id") Management_id: List<Int>): Observable<List<Quiz>>
+//    fun getSelectQuizList(@QueryMap option: Map<String, Int>): Observable<List<Quiz>>
 
     //오답노트생성
     @POST("/folder/wrong")
