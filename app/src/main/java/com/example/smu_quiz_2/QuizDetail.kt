@@ -1,16 +1,13 @@
 package com.example.smu_quiz_2
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.smu_quiz_2.adapter.QuizFolderAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_quiz_detail.*
-import kotlinx.android.synthetic.main.activity_quiz_folder.*
+
 
 class QuizDetail :AppCompatActivity(){
 
