@@ -3,16 +3,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.example.smu_quiz_2">
 
-    <uses-permission android:name="android.permission.INTERNET"/> <!-- 카메라, 내부 저장소 접근 권한 부여 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 카메라, 내부 저장소 접근 권한 부여 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera"
-                    android:required="true"/>
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="true" />
 
     <application
-            android:usesCleartextTraffic="true"
             android:name=".User"
             android:allowBackup="true"
             android:icon="@mipmap/ic_smu_odab_folder_logo"
@@ -20,44 +20,35 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".OdabPaintActivity">
-        </activity>
-        <activity android:name=".UserFolderActivity">
-        </activity>
-        <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".FolderAddActivity">
-        </activity>
-        <activity android:name=".OdabAddActivity">
-        </activity>
-        <activity android:name=".OdabFolderActivity">
-        </activity>
-        <activity android:name=".OdabDetailActivity">
-        </activity>
-        <activity android:name=".PictureChoiceActivity">
-        </activity>
-        <activity android:name=".QuizFolderActivity">
-        </activity>
-        <activity android:name=".QuizAdd">
-        </activity>
-        <activity android:name=".QuizDetail">
-        </activity> <!-- 스플래쉬 -->
+        <activity android:name=".QuizSolveActivity"></activity>
+        <activity android:name=".OdabPaintActivity"></activity>
+        <activity android:name=".UserFolderActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".FolderAddActivity"></activity>
+        <activity android:name=".OdabAddActivity"></activity>
+        <activity android:name=".OdabFolderActivity"></activity>
+        <activity android:name=".OdabDetailActivity"></activity>
+        <activity android:name=".PictureChoiceActivity"></activity>
+        <activity android:name=".QuizFolderActivity"></activity>
+        <activity android:name=".QuizAdd"></activity>
+        <activity android:name=".QuizDetail"></activity> <!-- 스플래쉬 -->
         <activity android:name=".SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- 사진 촬영을 위한 프로바이더 -->
         <provider
-                android:authorities="com.example.smu_quiz_2"
                 android:name="androidx.core.content.FileProvider"
+                android:authorities="com.example.smu_quiz_2"
                 android:exported="false"
                 android:grantUriPermissions="true">
-                <meta-data
+            <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths"/>
+                    android:resource="@xml/file_paths" />
         </provider>
     </application>
 

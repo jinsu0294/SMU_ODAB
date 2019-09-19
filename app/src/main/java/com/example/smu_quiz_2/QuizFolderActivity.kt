@@ -120,10 +120,13 @@ class QuizFolderActivity : AppCompatActivity() {
                     for (i in quiz)
                         Log.e("123123", quiz.toString())
                     //TODO :: select qyiz list 받아옴. 이것들로 문제 풀어보기 가능하
+
                 }, { error ->
                     error.printStackTrace()
                 }, {
                 })
+            val intent = Intent(this, QuizSolveActivity::class.java)
+            startActivity(intent)
         }
 
 
