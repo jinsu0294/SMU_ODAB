@@ -6,7 +6,7 @@ import java.net.URL
 data class Wrong(
     var wrong_id: Int,
     var email: String,
-    var image: Uri,
+    var image: URL,
     var title: String,
     var text: String,
     var Management_id: Int

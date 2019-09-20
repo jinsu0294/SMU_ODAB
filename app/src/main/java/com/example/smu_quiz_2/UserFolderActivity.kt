@@ -31,8 +31,10 @@ class UserFolderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userfolder)
         auth = FirebaseAuth.getInstance()
+
         // 사용자 이메일 받아오기
         email = auth.currentUser?.email
+
         //로그인 되어있는지 확인
         if (email == null) {  // 사용자 아이디가 없으면 LoginActivity 로 가기
             val intent = Intent(this, LoginActivity::class.java)
@@ -54,6 +56,7 @@ class UserFolderActivity : AppCompatActivity() {
                     }
 
                     tvNothing.visibility = if(list.size ==0) View.VISIBLE else View.INVISIBLE
+
                     val mAdapter = FolderAdapter(this, folderList)
                     rvFolderRecyclerview.adapter = mAdapter
 
@@ -65,7 +68,7 @@ class UserFolderActivity : AppCompatActivity() {
                     Log.e("123123", "false")
                     error.printStackTrace()
                 }, {
-                    Log.e("123123", "complete")
+                    Log.e("getFolder: ", "complete")
                 })
 
         }
@@ -95,21 +98,6 @@ class UserFolderActivity : AppCompatActivity() {
             }
         }
     }
-
-
-//    fun checkFolder(){
-//        // 폴더가 없는 경우
-//        val user = application as User
-//        val mAdapter = FolderAdapter(this, user.folderList)
-//        Log.e("폴더리스트 사이즈",mAdapter.itemCount.toString())
-//        if(mAdapter.itemCount == 0){
-//            tvNothing.visibility = View.VISIBLE
-//            rvFolderRecyclerview.visibility = View.INVISIBLE
-//        }else{  // 폴더가 있는 경우
-//            tvNothing.visibility = View.GONE
-//            rvFolderRecyclerview.visibility = View.VISIBLE
-//        }
-//    }
 
     companion object {
         val SELECT_ADD = 500

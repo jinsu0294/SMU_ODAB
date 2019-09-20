@@ -2,6 +2,7 @@ package com.example.smu_quiz_2.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,8 @@ class OdabFolderAdapter(val context: Context, val odablist: ArrayList<WrongList>
             itemView.setOnClickListener {
                 val intent = Intent(context,OdabDetailActivity::class.java)
                 intent.putExtra("position", position)
+                intent.putExtra("wrong_id", odablist.wrong_id)
+                Log.e("Odab_Folder_Id", odablist.wrong_id.toString())
                 itemView.context.startActivity(intent)
             }
         }

@@ -25,9 +25,13 @@ import java.util.*
 
 
 class PictureChoiceActivity: AppCompatActivity(){
+<<<<<<< Updated upstream
     var currentPhotoPath = ""
     lateinit var photouri:Uri
     lateinit var camerafile:File
+=======
+    var currentPhotoPath:String = ""
+>>>>>>> Stashed changes
 
 
     // 앨범에서 이미지 선택
@@ -75,6 +79,8 @@ class PictureChoiceActivity: AppCompatActivity(){
                 if(data?.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
                     //사진 URI = photoUri
                     var photoUri = data.data
+                    Log.e("PHOTOURI", photoUri.toString())
+
                     var cursor:Cursor?=null
 
                     val proj = arrayOf(MediaStore.Images.Media.DATA)
@@ -85,14 +91,26 @@ class PictureChoiceActivity: AppCompatActivity(){
                     cursor.moveToFirst()
                     var tempfile = File(cursor.getString(column_index))
 
+<<<<<<< Updated upstream
                     Log.e("tempfile.touri",tempfile.toURI().toString())
                     Log.e("tempfile",tempfile.absolutePath)
                     Log.e("tempfile.tourl",tempfile.toURL().toString())
+=======
+                    Log.e("tempfile : ", tempfile.toString())    //storage/emulated/0/DCIM/Screenshots/Screenshot_20170726-231806.png
+
+>>>>>>> Stashed changes
 
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
                     val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
-                    val mintent = Intent(this,OdabPaintActivity::class.java)
+                    Log.e("TtempFile",Uri.fromFile(tempfile).toString())    //file:///storage/emulated/0/Pictures/KakaoTalk/1555379132221.jpg
+                    Log.e("PhotoPath", tempfile.absolutePath)       ///storage/emulated/0/Pictures/KakaoTalk/1555379132221.jpg
+                    Log.e("PhptoFileName", tempfile.name)   //1555379132221.jpg
+//
+
+                    user.photoFile = tempfile
+
+                    val mintent = Intent(this,OdabAddActivity::class.java)
                     mintent.putExtra("path",tempfile.absolutePath)
                     user.photo = mbitmap
                     setResult(SELECT_PHOTO)
@@ -127,6 +145,10 @@ class PictureChoiceActivity: AppCompatActivity(){
                   null
                 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
@@ -137,6 +159,7 @@ class PictureChoiceActivity: AppCompatActivity(){
                     photouri = photoURI
                     Log.e("uri",photoFile?.toURL().toString())
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    Log.e("photofile_Path",currentPhotoPath)
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
                 }
             }

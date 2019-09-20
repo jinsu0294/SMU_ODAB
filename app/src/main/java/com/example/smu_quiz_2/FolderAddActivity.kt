@@ -50,11 +50,7 @@ class FolderAddActivity:AppCompatActivity(){
                     })
 
                 val intent = Intent(this,UserFolderActivity::class.java)
-                val user = application as User
-                user.add(folderTitle)
-                // 인텐트로 title 넘겨줌
-                // 통신 되면 여기는 없어져도 됨
-//                intent.putExtra("title",folderTitle)
+
                 startActivity(intent)
                 setResult(Activity.RESULT_OK)
                 Log.e("Folder Add finish","yes")

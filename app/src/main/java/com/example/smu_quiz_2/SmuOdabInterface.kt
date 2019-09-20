@@ -1,9 +1,11 @@
 package com.example.smu_quiz_2
 
 
+import android.telecom.Call
 import com.example.smu_quiz_2.data_class.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import retrofit2.http.*
 
 
@@ -56,15 +58,17 @@ interface SmuOdabInterface {
 
     //오답노트생성
     @POST("/folder/wrong")
-    fun createWrong(@Body value: CreateWrong): Observable<CreateWrong>
+
+    fun createWrong(@Body value: CreateWrong): Observable<Wrong>
+
 
     //오답노트 리스트조회
-    @GET("/folder/wrong/detail_wrong")
-    fun getWrongList(@Query("Management_id") forder_id: Int): Observable<List<WrongList>>
+    @GET("/folder/detail_wrong")
+    fun getWrongList(@Query("Management_id") folder_id: Int): Observable<List<WrongList>>
 
     //오답노트상세조회
     @GET("/folder/wrong/{wrong_id}")
-    fun getWrongDetail(): Observable<Wrong>
+    fun getWrongDetail(@Path("wrong_id") wrong_id:Int): Observable<Wrong>
 
     //오답노트수정 x
     //오답노트삭제

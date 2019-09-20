@@ -2,7 +2,9 @@ package com.example.smu_quiz_2
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.net.Uri
 import com.example.smu_quiz_2.data_class.*
+import java.io.File
 
 class User: Application() {
 
@@ -15,7 +17,19 @@ class User: Application() {
 
     var quizlist = arrayListOf<Quiz>()
 
+
     lateinit var photo: Bitmap
+
+//    lateinit var photoPath: String
+
+//    lateinit var photoFileName: String
+
+    lateinit var photoFile:File
+
+//    lateinit var photoUri:Uri
+
+
+
 
     fun setPermission(permission:Boolean?){
         this.ispermission = permission

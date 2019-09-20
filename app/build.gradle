@@ -3,7 +3,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+
 apply plugin: 'com.google.gms.google-services'
+
+//apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -46,5 +49,25 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-database:16.0.5'
+    implementation 'com.google.firebase:firebase-storage:17.0.0'
+
+
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+//    kapt "android.arch.lifecycle:compiler:1.0.0"
+//    implementation 'com.github.bumptech.glide:compiler:4.9.0'
+
+
+    // Glide
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 
 }

@@ -3,12 +3,21 @@ package com.example.smu_quiz_2
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.Task
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_odab_add.*
 import kotlinx.android.synthetic.main.activity_odab_detail.*
+import javax.net.ssl.ManagerFactoryParameters
+import kotlin.coroutines.Continuation
 
 class OdabDetailActivity:AppCompatActivity(){
 
@@ -21,17 +30,39 @@ class OdabDetailActivity:AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_odab_detail)
 
-        // TODO:: 오답노트상세조회 getQuiz()
-        // wrong_id(오답아이디)를 보내서 내용을 받아옵니다.
-        // 오답아이디는 오답리스트에서 선택한 아이템을 이용하여 받아오면 될 듯
-        // wrong_id, image, title, text, email, Management_id
-        // title, image, text 를 뷰에 보여주면 됩니다.
-        // title.text = result.text.toString()
-        // text.text = result.text.toString()
+        val user = application as User
+
+        val wrongId = intent.getIntExtra("wrong_id",-1)
+        Log.e("OdabDetail_WrongId", wrongId.toString())
 
 
+
+//        Log.e("Storage",ref.toString())
+
+//        val url = ref.downloadUrl
+//        Log.e("downloadUrl",url.)
+
+        // TODO:: 오답노트상세조회 getWrongDetail()
+        smuOdabInterface.getWrongDetail(wrongId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ list ->
+                Log.e("list", list.toString())
+                tvUserOdabTitle.text = list.title
+                Glide.with(this).load(list.image).into(ivPictureDetail)
+//                ivPictureDetail.setImageURL(list.image)
+//                ivPictureDetail.setImageURI(null)
+                tvUserTextContents.text = list.text
+                Log.e("123123", list.image.toString())
+            }, { error ->
+                error.printStackTrace()
+                Log.e("123123", "false")
+            }, {
+                Log.e("getWrongDetail: ","complete")
+            })
         val position = intent.getIntExtra("position", -1)
         Log.e("아이템 postion",position.toString())
+
         if(position != -1){
           /*  tvUserOdabTitle.text = user.odablist[position].title
             tvUserTextContents.text = user.odablist[position].textContents
