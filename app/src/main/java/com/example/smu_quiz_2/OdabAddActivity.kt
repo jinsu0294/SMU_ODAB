@@ -82,8 +82,7 @@ class OdabAddActivity : AppCompatActivity() {
 
 
                 // TODO:: OK 오답노트생성 createWrong()
-                smuOdabInterface.createWrong(wrong, (user.photo.toString())
-                )
+                smuOdabInterface.createWrong(wrong)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ result ->
