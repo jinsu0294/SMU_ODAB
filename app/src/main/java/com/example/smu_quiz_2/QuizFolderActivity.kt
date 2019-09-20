@@ -2,6 +2,7 @@ package com.example.smu_quiz_2
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.smu_quiz_2.adapter.QuizFolderAdapter
+import com.example.smu_quiz_2.data_class.Quiz
 import com.example.smu_quiz_2.data_class.QuizList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -22,12 +24,12 @@ class QuizFolderActivity : AppCompatActivity() {
     var quizlist = arrayListOf<QuizList>()
 
     val quizId: ArrayList<Int> = arrayListOf<Int>()
+    var selectquiz = arrayListOf<Quiz>()
 
     // 뷰 처리하는 코드 빼고 없애도 될 듯(통신 되면)
     // 폴더가 있는지 없는지 확인하는 함수
     fun checkFolder(mAdapter: QuizFolderAdapter) {
         Log.e("USER QUIZLIST", quizlist.size.toString())   // 저장되어있는 quizlist 확인하려는 Log
-
         // 폴더가 없는 경우
         if (mAdapter.itemCount == 0) {
             tvNothing.visibility = View.VISIBLE // 입력값이 없습니다 표시하는 textView 보이게
@@ -87,7 +89,6 @@ class QuizFolderActivity : AppCompatActivity() {
         }
 
         var click = -1
-
         // 전체선택 버튼 리스너
         btnAllCheck.setOnClickListener {
             // 홀수 번 클릭 했을 때
@@ -106,6 +107,8 @@ class QuizFolderActivity : AppCompatActivity() {
             val mAdapter = QuizFolderAdapter(this, quizlist)
             rvQuizRecyclerView.adapter = mAdapter
         }
+        val user = application as User
+        var j=0
         btnSolve.setOnClickListener {
             quizId.clear()
             for (i in 0..quizlist.size - 1) {
@@ -113,20 +116,10 @@ class QuizFolderActivity : AppCompatActivity() {
                     quizId.add(mAdapter.quizList[i].quiz_id!!)
                 }
             }
-            smuOdabInterface.getSelectQuizList(quizId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ quiz ->
-                    for (i in quiz)
-                        Log.e("123123", quiz.toString())
-                    //TODO :: select qyiz list 받아옴. 이것들로 문제 풀어보기 가능하
-                }, { error ->
-                    error.printStackTrace()
-                }, {
-                })
+            val intent = Intent(this, QuizSolveActivity::class.java)
+            intent.putExtra("quizId",quizId)
+            startActivity(intent)
         }
-
-
     }
 
     // resultCode -> RESULT_OK 이면, 액티비티 종료

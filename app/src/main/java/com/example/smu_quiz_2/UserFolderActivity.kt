@@ -47,7 +47,7 @@ class UserFolderActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ list ->
-                    // i = 0; 받아온 list 만큼 돌면서 folderList 에 요소 추가
+                    // index = 0; 받아온 list 만큼 돌면서 folderList 에 요소 추가
                     // 여기서 세팅된 folderList 는 리사이클러뷰 adapter 에 넘겨줄 것이다.
                     for (i in 0..list.size - 1) {
                         folderList.add(FolderList(list[i].id, list[i].title, email))

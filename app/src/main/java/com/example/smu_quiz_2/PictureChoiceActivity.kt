@@ -15,6 +15,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_picture_choice.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -23,6 +26,8 @@ import java.util.*
 
 class PictureChoiceActivity: AppCompatActivity(){
     var currentPhotoPath = ""
+    lateinit var photouri:Uri
+    lateinit var camerafile:File
 
 
     // 앨범에서 이미지 선택
@@ -80,6 +85,9 @@ class PictureChoiceActivity: AppCompatActivity(){
                     cursor.moveToFirst()
                     var tempfile = File(cursor.getString(column_index))
 
+                    Log.e("tempfile.touri",tempfile.toURI().toString())
+                    Log.e("tempfile",tempfile.absolutePath)
+                    Log.e("tempfile.tourl",tempfile.toURL().toString())
 
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
@@ -98,6 +106,7 @@ class PictureChoiceActivity: AppCompatActivity(){
                     val mbitmap = BitmapFactory.decodeFile(currentPhotoPath)
                     val mintent = Intent(this,OdabPaintActivity::class.java)
                     mintent.putExtra("path",currentPhotoPath)
+                    Log.e("tempfile.tourl",currentPhotoPath)
                     user.setphoto(mbitmap)
                     setResult(SELECT_PHOTO)
                     finish()
@@ -112,12 +121,12 @@ class PictureChoiceActivity: AppCompatActivity(){
             takePictureIntent.resolveActivity(packageManager)?.also {
                 // Create the File where the photo should go
                 val photoFile: File? = try {
-                    Log.e("photofile_Path",currentPhotoPath)
                     createImageFile()
 
                 } catch (ex: IOException) {
                   null
                 }
+
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
@@ -125,6 +134,8 @@ class PictureChoiceActivity: AppCompatActivity(){
                         packageName,
                         it
                     )
+                    photouri = photoURI
+                    Log.e("uri",photoFile?.toURL().toString())
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
                 }

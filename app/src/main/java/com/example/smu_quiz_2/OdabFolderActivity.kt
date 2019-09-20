@@ -59,8 +59,8 @@ class OdabFolderActivity : AppCompatActivity() {
 
         // TODO:: 오답노트 리스트조회 getWrongList()
         // Management_id(폴더 아이디)를 넘겨서 오답노트 리스트를 받아옵니다.
-        // for(i in 0..list.size-1)
-        //      wrongList.add(WrongList(list[i].wrong_id,list[i].title, Management_id(이건 받아와야하는것))
+        // for(index in 0..list.size-1)
+        //      wrongList.add(WrongList(list[index].wrong_id,list[index].title, Management_id(이건 받아와야하는것))
 
         smuOdabInterface.getWrongList(Management_id)
             .subscribeOn(Schedulers.io())
