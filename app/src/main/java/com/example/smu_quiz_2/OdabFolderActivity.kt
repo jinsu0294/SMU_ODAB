@@ -29,20 +29,8 @@ class OdabFolderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_userfolder)
 
-<<<<<<< Updated upstream
-        val Management_id = intent.getIntExtra("Management_id", 1)
-        wronglist.add(WrongList(1,"22",3))
-        var mAdapter = OdabFolderAdapter(this, wronglist)
-        rvFolderRecyclerview.adapter = mAdapter
-
-        // TODO:: 오답노트 리스트조회 getWrongList()
-        // Management_id(폴더 아이디)를 넘겨서 오답노트 리스트를 받아옵니다.
-        // for(index in 0..list.size-1)
-        //      wrongList.add(WrongList(list[index].wrong_id,list[index].title, Management_id(이건 받아와야하는것))
-=======
         val Management_id = intent.getIntExtra("Management_id", -1)
         Log.e("folderId", Management_id.toString())
->>>>>>> Stashed changes
 
         // TODO:: OK 오답노트 리스트조회 getWrongList()
         smuOdabInterface.getWrongList(Management_id)

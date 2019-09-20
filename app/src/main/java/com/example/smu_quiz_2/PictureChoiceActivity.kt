@@ -25,13 +25,9 @@ import java.util.*
 
 
 class PictureChoiceActivity: AppCompatActivity(){
-<<<<<<< Updated upstream
     var currentPhotoPath = ""
     lateinit var photouri:Uri
     lateinit var camerafile:File
-=======
-    var currentPhotoPath:String = ""
->>>>>>> Stashed changes
 
 
     // 앨범에서 이미지 선택
@@ -91,15 +87,6 @@ class PictureChoiceActivity: AppCompatActivity(){
                     cursor.moveToFirst()
                     var tempfile = File(cursor.getString(column_index))
 
-<<<<<<< Updated upstream
-                    Log.e("tempfile.touri",tempfile.toURI().toString())
-                    Log.e("tempfile",tempfile.absolutePath)
-                    Log.e("tempfile.tourl",tempfile.toURL().toString())
-=======
-                    Log.e("tempfile : ", tempfile.toString())    //storage/emulated/0/DCIM/Screenshots/Screenshot_20170726-231806.png
-
->>>>>>> Stashed changes
-
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
                     val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
@@ -145,10 +132,6 @@ class PictureChoiceActivity: AppCompatActivity(){
                   null
                 }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
