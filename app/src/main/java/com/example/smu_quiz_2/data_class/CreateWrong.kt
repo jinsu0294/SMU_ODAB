@@ -10,7 +10,7 @@ import java.text.Format
 
 data class CreateWrong(
     var email: String,
-    var image: MultipartBody.Part,
+    var imageURI: String,
     var title: String,
     var text: String,
     var Management_id: Int

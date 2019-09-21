@@ -1,7 +1,6 @@
 package com.example.smu_quiz_2
 
-import android.app.Activity
-import android.app.PendingIntent.getActivity
+
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -9,16 +8,11 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.preference.PreferenceManager
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_picture_choice.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -51,7 +45,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         }
         // 촬영 버튼 리스너
         btnTakePicture.setOnClickListener {
-
                 dispatchTakePictureIntent()
 
         }
@@ -67,25 +60,6 @@ class PictureChoiceActivity: AppCompatActivity(){
                 if(data?.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
                     //사진 URI = photoUri
                     var photoUri = data.data
-//                    Log.e("PHOTOURI", photoUri.toString())
-//
-//                    var cursor:Cursor?=null
-//
-//                    val proj = arrayOf(MediaStore.Images.Media.DATA)
-//                    assert(photoUri != null)
-//                    cursor = getContentResolver().query(photoUri, proj, null, null, null)
-//                    assert(cursor != null)
-//                    val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-//                    cursor.moveToFirst()
-//                    var tempfile = File(cursor.getString(column_index))
-                    //진수 테스트
-
-
-
-                    val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-                    Log.e("date",timeStamp)
-                    val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                    Log.e("PHOTOURI", photouri.toString())
                     var cursor:Cursor?=null
                     val proj = arrayOf(MediaStore.Images.Media.DATA)
                     assert(photoUri != null)
@@ -94,34 +68,10 @@ class PictureChoiceActivity: AppCompatActivity(){
                     val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
                     cursor.moveToFirst()
                     var tempfile = File(cursor.getString(column_index))
-//                    var mimgefile: File? = try {
-//                        createImageFile()
-//
-//                    } catch (ex: IOException) {
-//                        null
-//                    }
-//                    mimgefile?.also {
-//                        val photoURI: Uri = FileProvider.getUriForFile(
-//                            this,
-//                            packageName,
-//                            tempfile
-//                        )
-//                        photouri = photoURI
-//                    }
-//                    Log.e("mimagefile",mimgefile.toString())
-
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
                     val mbitmap = BitmapFactory.decodeFile(tempfile.absolutePath,myoption)
-                    Log.e("TtempFile",Uri.fromFile(tempfile).toString())    //file:///storage/emulated/0/Pictures/KakaoTalk/1555379132221.jpg
-                    Log.e("PhotoPath", tempfile.absolutePath)       ///storage/emulated/0/Pictures/KakaoTalk/1555379132221.jpg
-                    Log.e("PhptoFileName", tempfile.name)   //1555379132221.jpg
-//
                     user.setphotofile(tempfile)
-                    user.photoFile = tempfile
-
-                    val mintent = Intent(this,OdabAddActivity::class.java)
-                    mintent.putExtra("path",tempfile)
                     user.photo = mbitmap
                     setResult(SELECT_PHOTO)
                     finish()
@@ -134,7 +84,6 @@ class PictureChoiceActivity: AppCompatActivity(){
                     val mbitmap = BitmapFactory.decodeFile(currentPhotoPath)
                     val mintent = Intent(this,OdabPaintActivity::class.java)
                     mintent.putExtra("path",currentPhotoPath)
-                    Log.e("tempfile.tourl",currentPhotoPath)
                     user.setphoto(mbitmap)
                     setResult(SELECT_PHOTO)
                     finish()
@@ -195,6 +144,8 @@ class PictureChoiceActivity: AppCompatActivity(){
         val REQUEST_TAKE_PHOTO = 400
     }
 
+
+    //비트맵 file형식으로 바꿔줌
     @Throws(IOException::class)
     private fun createFileFromBitmap(bitmap: Bitmap): File {
         val newFile = File(this.getFilesDir(), createImageFile().name)

@@ -2,10 +2,8 @@ package com.example.smu_quiz_2
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -15,38 +13,25 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.smu_quiz_2.data_class.CreateWrong
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+
 import kotlinx.android.synthetic.main.activity_odab_add.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageMetadata
-import retrofit2.http.Url
-import java.io.FileOutputStream
-import java.io.IOException
-import java.net.URLEncoder
-
+import com.google.firebase.storage.UploadTask
 
 class OdabAddActivity : AppCompatActivity() {
-
-
-    lateinit var storage: FirebaseStorage
     private lateinit var auth: FirebaseAuth
     var smuOdabAPI = SmuOdabAPI()
     var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
     var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
-
-    //lateinit var photoFile: File
-    lateinit var bitmapImage: Bitmap
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,10 +52,12 @@ class OdabAddActivity : AppCompatActivity() {
             if (etUserOdabTitle.text.isEmpty() || etUserOdabTextContents.text.isEmpty() || user.photo == null) {
                 Toast.makeText(this, getString(R.string.nothing), Toast.LENGTH_SHORT).show()
             } else {  // 입력값이 모두 있는 경우
+                Toast.makeText(this,"잠시만 기다려 주세요. ",Toast.LENGTH_LONG).show()
                 val title = etUserOdabTitle.text.toString()
                 val text = etUserOdabTextContents.text.toString()
 
-                //firebase에 올리는거
+               // val file = user.photoFile
+                var imageUri :String =""
                 val storage = FirebaseStorage.getInstance()
                 val storageRef = storage.reference
                 val OdabRef = storageRef.child("odabimage.jpg")
@@ -82,29 +69,43 @@ class OdabAddActivity : AppCompatActivity() {
 
                 val bitmap = (ivPicture.drawable as BitmapDrawable).bitmap
                 val baos = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos) //10% 화질로
                 val data = baos.toByteArray()
-
                 var uploadTask = OdabRef.putBytes(data)
-                uploadTask.addOnFailureListener {
-                    Log.e("success","실패")
-                }.addOnSuccessListener {
-                    Log.e("success",OdabImagesRef.downloadUrl.toString())
+
+                //업로드 성공
+                uploadTask.addOnSuccessListener {
+                    Toast.makeText(this,"오답을 성공적으로 추가하였습니다. ",Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, OdabFolderActivity::class.java)
                     intent.putExtra("Management_id", Management_id)
                     startActivity(intent)
                 }
-//                val wrong = CreateWrong(
-//                    email,
-//                    null,
-//                    title,
-//                    text,
-//                    Management_id
-//                )
-//                Log.e("wrong", wrong.toString())
-////                Log.e("Part", part.toString())
-//                Log.e("create Odab", wrong.toString())
-//
+
+                // URL 받기
+                val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
+                    }
+                    return@Continuation OdabRef.downloadUrl
+                }).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUri = task.result
+                        Log.e("downloadUri", downloadUri.toString())
+                        imageUri = downloadUri.toString()   // 이게 보낼 URL 스트링값
+                    } else {
+                        Log.e("Uri load","******")
+                    }
+                }
+                val wrong = CreateWrong(
+                    email,
+                    imageUri,
+                    title,
+                    text,
+                    Management_id
+                )
+                Log.e("create Odab", wrong.toString())
 //
 //                // TODO:: OK 오답노트생성 createWrong()
 //                smuOdabInterface.createWrong(wrong)

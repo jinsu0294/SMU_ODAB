@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.Task
@@ -74,10 +75,12 @@ class OdabDetailActivity:AppCompatActivity(){
             Toast.makeText(this,getString(R.string.error),Toast.LENGTH_SHORT).show()
             finish()
         }
-        btnPaint.setOnClickListener {
-            val intent = Intent(this, OdabPaintActivity::class.java)
-            intent.putExtra("position",position)
-            startActivity(intent)
-        }
+
+        btnPaint.visibility= View.INVISIBLE
+//        btnPaint.setOnClickListener {
+//            val intent = Intent(this, OdabPaintActivity::class.java)
+//            intent.putExtra("position",position)
+//            startActivity(intent)
+//        }
     }
 }
