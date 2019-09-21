@@ -1,6 +1,7 @@
 package com.example.smu_quiz_2
 
 import android.app.Activity
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -19,6 +20,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,8 +29,6 @@ import java.util.*
 class PictureChoiceActivity: AppCompatActivity(){
     var currentPhotoPath = ""
     lateinit var photouri:Uri
-    lateinit var camerafile:File
-
 
     // 앨범에서 이미지 선택
      private fun goToAlbum(){
@@ -44,14 +44,6 @@ class PictureChoiceActivity: AppCompatActivity(){
         setContentView(R.layout.activity_picture_choice)
 
         val user = application as User
-
-        // 사용자 권한 요청
-
-
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)  // 쉐어프리퍼런스 선언
-        val result = pref.getBoolean("isPermission", false)     // 사용자 권한 결과 가져옴
-        user.setPermission(result)  // user에 저장
-        val isPer = user.getPermission()    // user에 저장된 사용자 권한의 결과를 isPer 변수로 사용
 
         // 앨범 버튼 리스너
         btnGetPicture.setOnClickListener {
@@ -75,10 +67,26 @@ class PictureChoiceActivity: AppCompatActivity(){
                 if(data?.data != null) {  // 인텐트가 null이 아닐 때(사진을 선택했을 때)
                     //사진 URI = photoUri
                     var photoUri = data.data
-                    Log.e("PHOTOURI", photoUri.toString())
+//                    Log.e("PHOTOURI", photoUri.toString())
+//
+//                    var cursor:Cursor?=null
+//
+//                    val proj = arrayOf(MediaStore.Images.Media.DATA)
+//                    assert(photoUri != null)
+//                    cursor = getContentResolver().query(photoUri, proj, null, null, null)
+//                    assert(cursor != null)
+//                    val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+//                    cursor.moveToFirst()
+//                    var tempfile = File(cursor.getString(column_index))
+                    //진수 테스트
 
+
+
+                    val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+                    Log.e("date",timeStamp)
+                    val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                    Log.e("PHOTOURI", photouri.toString())
                     var cursor:Cursor?=null
-
                     val proj = arrayOf(MediaStore.Images.Media.DATA)
                     assert(photoUri != null)
                     cursor = getContentResolver().query(photoUri, proj, null, null, null)
@@ -86,6 +94,21 @@ class PictureChoiceActivity: AppCompatActivity(){
                     val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
                     cursor.moveToFirst()
                     var tempfile = File(cursor.getString(column_index))
+//                    var mimgefile: File? = try {
+//                        createImageFile()
+//
+//                    } catch (ex: IOException) {
+//                        null
+//                    }
+//                    mimgefile?.also {
+//                        val photoURI: Uri = FileProvider.getUriForFile(
+//                            this,
+//                            packageName,
+//                            tempfile
+//                        )
+//                        photouri = photoURI
+//                    }
+//                    Log.e("mimagefile",mimgefile.toString())
 
                     var myoption = BitmapFactory.Options()
                     myoption.inSampleSize=1
@@ -94,11 +117,11 @@ class PictureChoiceActivity: AppCompatActivity(){
                     Log.e("PhotoPath", tempfile.absolutePath)       ///storage/emulated/0/Pictures/KakaoTalk/1555379132221.jpg
                     Log.e("PhptoFileName", tempfile.name)   //1555379132221.jpg
 //
-
+                    user.setphotofile(tempfile)
                     user.photoFile = tempfile
 
                     val mintent = Intent(this,OdabAddActivity::class.java)
-                    mintent.putExtra("path",tempfile.absolutePath)
+                    mintent.putExtra("path",tempfile)
                     user.photo = mbitmap
                     setResult(SELECT_PHOTO)
                     finish()
@@ -131,7 +154,8 @@ class PictureChoiceActivity: AppCompatActivity(){
                 } catch (ex: IOException) {
                   null
                 }
-
+                val user = application as User
+                user.setphotofile(photoFile)
                 // Continue only if the File was successfully created
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
@@ -162,13 +186,22 @@ class PictureChoiceActivity: AppCompatActivity(){
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
-            Log.e("path",currentPhotoPath)
         }
     }
+
     companion object{
         val PICK_FROM_ALBUM = 200
         val SELECT_PHOTO = 300
         val REQUEST_TAKE_PHOTO = 400
+    }
+
+    @Throws(IOException::class)
+    private fun createFileFromBitmap(bitmap: Bitmap): File {
+        val newFile = File(this.getFilesDir(), createImageFile().name)
+        val fileOutputStream = FileOutputStream(newFile)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+        fileOutputStream.close()
+        return newFile
     }
 
 }

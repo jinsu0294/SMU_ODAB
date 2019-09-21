@@ -24,7 +24,7 @@ class User: Application() {
 
 //    lateinit var photoFileName: String
 
-    lateinit var photoFile:File
+    var photoFile:File?=null
 
 //    lateinit var photoUri:Uri
 
@@ -37,7 +37,9 @@ class User: Application() {
     fun getPermission():Boolean?{
         return this.ispermission
     }
-
+    fun setphotofile(file:File?){
+        this.photoFile=file
+    }
     fun setphoto(bitmap: Bitmap){
         this.photo = bitmap
     }
