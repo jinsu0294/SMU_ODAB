@@ -106,12 +106,21 @@
                     />
             <TextView
                     android:id="@+id/tvUserQuiz_1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
                     android:layout_marginLeft="@dimen/edit_padding_left"
+                    android:layout_weight="8"
                     />
+            <ImageView
+                    android:id="@+id/ivcorrect1"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/touchcorrect"
+                />
 
         </LinearLayout>
 
@@ -136,11 +145,20 @@
                     />
             <TextView
                     android:id="@+id/tvUserQuiz_2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
                     android:layout_marginLeft="@dimen/edit_padding_left"
+                    android:layout_weight="8"
+                    />
+            <ImageView
+                    android:id="@+id/ivcorrect2"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/touchcorrect"
                     />
         </LinearLayout>
 
@@ -165,12 +183,21 @@
                     />
             <TextView
                     android:id="@+id/tvUserQuiz_3"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
                     android:layout_marginLeft="@dimen/edit_padding_left"
+                    android:layout_weight="8"
                     />
+
+            <ImageView
+                    android:id="@+id/ivcorrect3"
+                    android:layout_width="10dp"
+                    android:layout_height="43dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/touchcorrect" />
         </LinearLayout>
 
         <!-- 4 -->
@@ -194,11 +221,20 @@
                     />
             <TextView
                     android:id="@+id/tvUserQuiz_4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/edit_text_size"
                     android:paddingLeft="@dimen/edit_padding_left"
                     android:layout_marginLeft="@dimen/edit_padding_left"
+                    android:layout_weight="8"
+                    />
+            <ImageView
+                    android:id="@+id/ivcorrect4"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/touchcorrect"
                     />
         </LinearLayout>
 
