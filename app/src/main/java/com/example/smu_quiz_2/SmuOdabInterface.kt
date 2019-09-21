@@ -58,8 +58,7 @@ interface SmuOdabInterface {
 
     //오답노트생성
     @POST("/folder/wrong")
-
-    fun createWrong(@Body value: CreateWrong): Observable<Wrong>
+    fun createWrong(@Body value: CreateWrong): Observable<CreateWrong>
 
 
     //오답노트 리스트조회
