@@ -57,13 +57,14 @@ class OdabAddActivity : AppCompatActivity() {
                 val text = etUserOdabTextContents.text.toString()
 
                // val file = user.photoFile
+                val imagefile = user.photoFile
+                val file = Uri.fromFile(imagefile)
                 var imageUri :String =""
                 val storage = FirebaseStorage.getInstance()
                 val storageRef = storage.reference
-                val OdabRef = storageRef.child("odabimage.jpg")
-                val OdabImagesRef = storageRef.child("images/odabimage.jpg")
-                OdabRef.name == OdabImagesRef.name // true
-                OdabRef.path == OdabImagesRef.path // false
+                val OdabRef = storageRef.child("${file.lastPathSegment}")
+                OdabRef.name == OdabRef.name // true
+                OdabRef.path == OdabRef.path // false
                 ivPicture.isDrawingCacheEnabled = true
                 ivPicture.buildDrawingCache()
 
@@ -76,9 +77,10 @@ class OdabAddActivity : AppCompatActivity() {
                 //업로드 성공
                 uploadTask.addOnSuccessListener {
                     Toast.makeText(this,"오답을 성공적으로 추가하였습니다. ",Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, OdabFolderActivity::class.java)
-                    intent.putExtra("Management_id", Management_id)
-                    startActivity(intent)
+//                    val intent = Intent(this, OdabFolderActivity::class.java)
+//                    intent.putExtra("Management_id", Management_id)
+//                    startActivity(intent)
+//                    finish()
                 }
 
                 // URL 받기
@@ -119,12 +121,12 @@ class OdabAddActivity : AppCompatActivity() {
 //                    }, {
 //                    })
 //
-//                val intent = Intent(this, OdabFolderActivity::class.java)
-//                intent.putExtra("Management_id", Management_id)
-//                startActivity(intent)
-//                setResult(Activity.RESULT_OK)
-//                Log.e("Folder Add finish", "yes")
-//                finish()
+                val intent = Intent(this, OdabFolderActivity::class.java)
+                intent.putExtra("Management_id", Management_id)
+                startActivity(intent)
+                setResult(Activity.RESULT_OK)
+                Log.e("Folder Add finish", "yes")
+                finish()
             }
 
         }
