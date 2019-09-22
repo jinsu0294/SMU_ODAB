@@ -3,13 +3,14 @@ package com.example.smu_quiz_2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_picture_choice.*
 
-class DeleteChoiceAcivity :AppCompatActivity(){
+class DeleteChoiceActivity :AppCompatActivity(){
 
     var smuOdabAPI = SmuOdabAPI()
     var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
@@ -55,12 +56,18 @@ class DeleteChoiceAcivity :AppCompatActivity(){
 //                }, { Log.d("Result", "complete::delelteQuiz") })
     }
 
+    // 버튼 backgroundColor, textColor 바꾸기
+    private fun settingButton(button: Button){
+        button.setBackground(getDrawable(R.drawable.round_fill_white))
+        button.setTextColor(getColor(R.color.darkPurple))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_choice)
 
-        btnTakePicture.text = "네"
-        btnGetPicture.text = "아니오"
+        btnTakePicture.text = "삭제하기"
+        btnGetPicture.text = "취소하기"
 
         val request = intent.getStringExtra("request")
         val folderId = intent.getIntExtra("Management_id",-1)
@@ -69,19 +76,22 @@ class DeleteChoiceAcivity :AppCompatActivity(){
 
 
         if(request == "DeleteFolder"){      // 폴더 삭제
-            // 네 버튼 리스너
+            // 삭제하기 버튼 리스너
             btnTakePicture.setOnClickListener{
+                settingButton(btnTakePicture)
                 deleteFolder(folderId)
                 finish()
             }
         } else if(request == "DeleteOdab"){     // 오답삭제
             btnTakePicture.setOnClickListener {
+                settingButton(btnTakePicture)
                 deleteOdab(wrongId)
                 finish()
             }
 
         } else if(request == "DeleteQuiz"){     // 퀴즈 삭제
             btnTakePicture.setOnClickListener {
+                settingButton(btnTakePicture)
                 delelteQuiz(quizId)
                 finish()
             }
@@ -89,8 +99,9 @@ class DeleteChoiceAcivity :AppCompatActivity(){
             Toast.makeText(this,"오류입니다.",Toast.LENGTH_SHORT).show()
         }
 
-        // 아니오 버튼 리스너
+        // 취소하기 버튼 리스너
         btnGetPicture.setOnClickListener {
+            settingButton(btnGetPicture)
             finish()
         }
 

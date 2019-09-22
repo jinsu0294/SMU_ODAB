@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
-import com.example.smu_quiz_2.DeleteChoiceAcivity
+import com.example.smu_quiz_2.DeleteChoiceActivity
 import com.example.smu_quiz_2.QuizDetail
 import com.example.smu_quiz_2.R
 import com.example.smu_quiz_2.data_class.QuizList
@@ -31,11 +31,12 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<QuizList>)
     }
 
     class Holder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
-        fun bind(quizList: QuizList, context: Context, position: Int) {
 
-            val quizTitle = itemView.findViewById<TextView>(R.id.tvQuizTitle)
-            val checkbox = itemView.findViewById<CheckBox>(R.id.checkbox)
-            val delete = itemView.findViewById<ImageButton>(R.id.btnDelete)
+        val quizTitle = itemView.findViewById<TextView>(R.id.tvQuizTitle)
+        val checkbox = itemView.findViewById<CheckBox>(R.id.checkbox)
+        val delete = itemView.findViewById<ImageButton>(R.id.btnDeleteQuiz)
+
+        fun bind(quizList: QuizList, context: Context, position: Int) {
 
             // quiz_folder_item 에서 아이디가 tvQuizTitle인 TextView (= quizTitle)의 text를 넘어온 quizList의 title로 설정
             quizTitle.text = quizList.title
@@ -55,9 +56,10 @@ class QuizFolderAdapter(var context: Context, var quizList: ArrayList<QuizList>)
 
             // 삭제 버튼 리스너
             delete.setOnClickListener{
-                val intent = Intent(context, DeleteChoiceAcivity::class.java)
+                val intent = Intent(context, DeleteChoiceActivity::class.java)
                 intent.putExtra("quiz_id", quizList.quiz_id)
                 intent.putExtra("request","DeleteQuiz")
+                itemView.context.startActivity(intent)
             }
 
 

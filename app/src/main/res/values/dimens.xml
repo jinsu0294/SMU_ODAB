@@ -34,4 +34,7 @@
     <!-- main icon size -->
     <dimen name="main_icon_size">200dp</dimen>
 
+    <!-- button -->
+    <dimen name="button_height">30dp</dimen>
+
 </resources>

@@ -4,7 +4,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/background"
+        android:background="@android:color/transparent"
+
 >
 
 
@@ -57,18 +58,18 @@
     <Button
             android:id="@+id/btnOk"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
             android:textSize="@dimen/button_text_size"
             android:textStyle="bold"
-            android:textColor="@color/darkPurple"
-            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:background="@drawable/round_fill_grey"
             android:gravity="center"
             android:text="@string/ok"
             app:layout_constraintBottom_toBottomOf="@id/view2"
             app:layout_constraintLeft_toLeftOf="@id/view2"
             app:layout_constraintRight_toRightOf="@id/view2"
-            android:layout_marginLeft="@dimen/margin10"
-            android:layout_marginRight="@dimen/margin10"
+            android:layout_marginLeft="@dimen/margin30"
+            android:layout_marginRight="@dimen/margin30"
             android:layout_marginBottom="@dimen/margin10"
     />
 

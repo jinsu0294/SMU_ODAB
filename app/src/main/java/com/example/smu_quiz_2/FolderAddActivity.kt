@@ -7,6 +7,7 @@ import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import com.example.smu_quiz_2.data_class.CreateFolder
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,13 @@ class FolderAddActivity:AppCompatActivity(){
     var smuOdabAPI = SmuOdabAPI()
     var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
     var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
+
+
+    // 버튼 backgroundColor, textColor 바꾸기
+    private fun settingButton(button: Button){
+        button.setBackground(getDrawable(R.drawable.round_fill_white))
+        button.setTextColor(getColor(R.color.darkPurple))
+    }
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +45,7 @@ class FolderAddActivity:AppCompatActivity(){
             if(etUserFolderTitle.text.isEmpty()){
                 Toast.makeText(this,getString(R.string.nothing),Toast.LENGTH_SHORT).show()
             }else{  // 입력값이 모두 있을 때
+                settingButton(btnOk)
                 val folderTitle = etUserFolderTitle.text.toString()
 
                 // TODO:: OK 폴더생성 createFolder()

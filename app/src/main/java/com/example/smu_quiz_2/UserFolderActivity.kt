@@ -7,6 +7,7 @@ import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smu_quiz_2.adapter.FolderAdapter
 import com.example.smu_quiz_2.data_class.FolderList
@@ -72,11 +73,13 @@ class UserFolderActivity : AppCompatActivity() {
                 })
 
         }
+
         // 추가 버튼 리스너
         btnAdd.setOnClickListener {
             val intent = Intent(this, FolderAddActivity::class.java)
             startActivityForResult(intent, SELECT_ADD)
         }
+
         //logout
         btnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

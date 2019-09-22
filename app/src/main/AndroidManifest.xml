@@ -26,14 +26,20 @@
         <activity android:name=".OdabPaintActivity"></activity>
         <activity android:name=".UserFolderActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".FolderAddActivity"></activity>
+        <activity android:name=".FolderAddActivity"
+                  android:theme = "@style/Transparent">     <!-- 배경 투명하게 -->
+        </activity>
         <activity android:name=".OdabAddActivity"></activity>
         <activity android:name=".OdabFolderActivity"></activity>
         <activity android:name=".OdabDetailActivity"></activity>
-        <activity android:name=".PictureChoiceActivity"></activity>
+        <activity android:name=".PictureChoiceActivity"
+                  android:theme = "@style/Transparent" >    <!-- 배경 투명하게 -->
+        </activity>
         <activity android:name=".QuizFolderActivity"></activity>
         <activity android:name=".QuizAdd"></activity>
-        <activity android:name=".DeleteChoiceAcivity"></activity>
+        <activity android:name=".DeleteChoiceActivity"
+                  android:theme = "@style/Transparent">      <!-- 배경 투명하게 -->
+        </activity>
         <activity android:name=".QuizDetail"></activity> <!-- 스플래쉬 -->
         <activity android:name=".SplashActivity">
             <intent-filter>

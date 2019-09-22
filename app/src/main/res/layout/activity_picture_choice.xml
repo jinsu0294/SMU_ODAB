@@ -3,6 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
 >
     <View
@@ -30,8 +31,8 @@
         <Button
                 android:id="@+id/btnTakePicture"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey"
+                android:layout_height="@dimen/button_height"
+                android:background="@drawable/round_fill_grey"
                 android:textColor="@color/white"
                 android:text="@string/take_picture"
                 android:textSize="@dimen/button_text_size"
@@ -39,8 +40,9 @@
         <Button
                 android:id="@+id/btnGetPicture"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey"
+                android:layout_height="@dimen/button_height"
+                android:background="@drawable/round_fill_grey"
+                android:layout_marginTop="@dimen/margin5"
                 android:text="@string/get_picture"
                 android:textColor="@color/white"
                 android:textSize="@dimen/button_text_size"

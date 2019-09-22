@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.example.smu_quiz_2.data_class.Quiz
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,6 +25,7 @@ class QuizSolveActivity : AppCompatActivity() {
     var choice = mutableListOf<Choice>()
     var choicetv = mutableListOf<Choicetv>()
     var explain = false
+
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +95,6 @@ class QuizSolveActivity : AppCompatActivity() {
         }
 
         btnNext.setOnClickListener {
-
             if (index+1  > quiz.size) {
                 Toast.makeText(this, "다음 문제가 없습니다.", Toast.LENGTH_SHORT).show()
             } else {

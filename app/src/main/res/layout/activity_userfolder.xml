@@ -24,14 +24,15 @@
     <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:backgroundTint="@color/darkPurple"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/round_fill"
             android:text="@string/logout"
             android:textColor="@color/white"
             android:textSize="@dimen/button_text_size"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="@dimen/margin10"
+            android:layout_marginTop="@dimen/margin10"
 
     />
 
@@ -63,6 +64,8 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginRight="@dimen/margin10"
             android:layout_marginLeft="@dimen/margin10"
+            android:layout_marginBottom="@dimen/margin10"
+
     >
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -71,8 +74,8 @@
     <Button
             android:id="@+id/btnAdd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/darkPurple"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/round_fill"
             android:text="@string/add"
             android:textColor="@color/white"
             android:textSize="@dimen/button_text_size"

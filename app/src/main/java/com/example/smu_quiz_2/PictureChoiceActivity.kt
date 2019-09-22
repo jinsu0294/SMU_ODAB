@@ -12,6 +12,8 @@ import android.os.Environment
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.google.android.gms.tasks.Continuation
@@ -42,7 +44,11 @@ class PictureChoiceActivity: AppCompatActivity(){
     }
 
 
-
+    // 버튼 backgroundColor, textColor 바꾸기
+    private fun settingButton(button: Button){
+        button.setBackground(getDrawable(R.drawable.round_fill_white))
+        button.setTextColor(getColor(R.color.darkPurple))
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_choice)
@@ -51,11 +57,13 @@ class PictureChoiceActivity: AppCompatActivity(){
 
         // 앨범 버튼 리스너
         btnGetPicture.setOnClickListener {
-                goToAlbum()
+            settingButton(btnGetPicture)
+            goToAlbum()
         }
         // 촬영 버튼 리스너
         btnTakePicture.setOnClickListener {
-                dispatchTakePictureIntent()
+            settingButton(btnTakePicture)
+            dispatchTakePictureIntent()
 
         }
     }
@@ -113,6 +121,7 @@ class PictureChoiceActivity: AppCompatActivity(){
                 } catch (ex: IOException) {
                   null
                 }
+
                 val user = application as User
                 user.setphotofile(photoFile)
                 // Continue only if the File was successfully created

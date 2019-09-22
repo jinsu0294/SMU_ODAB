@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.ContextCompat.getDrawable
 import com.example.smu_quiz_2.*
 import com.example.smu_quiz_2.data_class.Folder
 import com.example.smu_quiz_2.data_class.FolderList
@@ -57,7 +59,7 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<FolderList>)
 
             // 삭제 버튼 리스너
             delete.setOnClickListener{
-                val intent = Intent(context, DeleteChoiceAcivity::class.java)
+                val intent = Intent(context, DeleteChoiceActivity::class.java)
                 intent.putExtra("Management_id",folderList.id)
                 intent.putExtra("request","DeleteFolder")
                 itemView.context.startActivity(intent)

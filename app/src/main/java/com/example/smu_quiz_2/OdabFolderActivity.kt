@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.smu_quiz_2.adapter.OdabFolderAdapter
@@ -23,6 +24,7 @@ class OdabFolderActivity : AppCompatActivity() {
     var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
     var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
     var wrongList = ArrayList<WrongList>()
+
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

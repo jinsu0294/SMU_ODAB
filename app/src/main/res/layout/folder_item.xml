@@ -61,20 +61,21 @@
         <Button
                 android:id="@+id/btnOdab"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/button_height"
                 android:textSize="@dimen/button_text_size"
                 android:textColor="@color/darkPurple"
-                android:backgroundTint="@color/white"
+                android:background="@drawable/round_fill_white"
                 android:text="@string/odab"
+                android:layout_marginBottom="@dimen/margin10"
 
         />
         <Button
                 android:id="@+id/btnQuiz"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/button_height"
                 android:textSize="@dimen/button_text_size"
                 android:textColor="@color/darkPurple"
-                android:backgroundTint="@color/white"
+                android:background="@drawable/round_fill_white"
                 android:text="@string/solveQuiz"
 
         />
