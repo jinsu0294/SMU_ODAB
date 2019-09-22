@@ -8,12 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
+import com.example.smu_quiz_2.*
 import com.example.smu_quiz_2.data_class.Folder
-import com.example.smu_quiz_2.OdabFolderActivity
-import com.example.smu_quiz_2.QuizFolderActivity
-import com.example.smu_quiz_2.R
 import com.example.smu_quiz_2.data_class.FolderList
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 class FolderAdapter(val context: Context, val folderList: ArrayList<FolderList>): RecyclerView.Adapter<FolderAdapter.Holder>(){
@@ -35,6 +36,7 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<FolderList>)
         val folderName = itemView.findViewById<TextView>(R.id.tvFolderName)
         val odab=itemView.findViewById<Button>(R.id.btnOdab)
         val quiz = itemView.findViewById<Button>(R.id.btnQuiz)
+        val delete = itemView.findViewById<ImageButton>(R.id.btnDelete)
 
         fun bind(folderList: FolderList, context:Context){
             folderName.text = folderList.title
@@ -50,6 +52,14 @@ class FolderAdapter(val context: Context, val folderList: ArrayList<FolderList>)
             quiz.setOnClickListener {
                 val intent = Intent(context, QuizFolderActivity::class.java)
                 intent.putExtra("Management_id",folderList.id)
+                itemView.context.startActivity(intent)
+            }
+
+            // 삭제 버튼 리스너
+            delete.setOnClickListener{
+                val intent = Intent(context, DeleteChoiceAcivity::class.java)
+                intent.putExtra("Management_id",folderList.id)
+                intent.putExtra("request","DeleteFolder")
                 itemView.context.startActivity(intent)
             }
         }

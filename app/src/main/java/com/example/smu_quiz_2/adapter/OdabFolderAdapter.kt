@@ -1,5 +1,6 @@
 package com.example.smu_quiz_2.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -7,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import com.example.smu_quiz_2.DeleteChoiceAcivity
 import com.example.smu_quiz_2.OdabDetailActivity
 import com.example.smu_quiz_2.R
 import com.example.smu_quiz_2.data_class.WrongList
@@ -32,6 +35,7 @@ class OdabFolderAdapter(val context: Context, val odablist: ArrayList<WrongList>
     class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(odablist: WrongList, context:Context, position: Int){
             val title = itemView.findViewById<TextView>(R.id.tvOdabTitle)
+            val delete = itemView.findViewById<ImageButton>(R.id.btnDelete)
             title.text = odablist.title
 
             // item 클릭 리스너
@@ -40,6 +44,14 @@ class OdabFolderAdapter(val context: Context, val odablist: ArrayList<WrongList>
                 intent.putExtra("position", position)
                 intent.putExtra("wrong_id", odablist.wrong_id)
                 Log.e("Odab_Folder_Id", odablist.wrong_id.toString())
+                itemView.context.startActivity(intent)
+            }
+
+            // 삭제 버튼 리스너
+            delete.setOnClickListener {
+                val intent = Intent(context, DeleteChoiceAcivity::class.java)
+                intent.putExtra("wrong_id", odablist.wrong_id)
+                intent.putExtra("request", "DeleteOdab")
                 itemView.context.startActivity(intent)
             }
         }

@@ -35,5 +35,17 @@
             app:layout_constraintLeft_toRightOf="@id/checkbox"
             android:layout_marginLeft="@dimen/margin10"
     />
+    <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete_light_purple"
+            android:background="@android:color/transparent"
+            app:layout_constraintRight_toRightOf="@id/view"
+            app:layout_constraintTop_toTopOf="@id/view"
+            app:layout_constraintBottom_toBottomOf="@id/view"
+            android:layout_marginRight="@dimen/margin10"
+
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

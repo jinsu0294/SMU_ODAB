@@ -7,6 +7,7 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import retrofit2.http.*
+import java.lang.NullPointerException
 
 
 interface SmuOdabInterface {
@@ -31,7 +32,7 @@ interface SmuOdabInterface {
     //폴더삭제
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "{/folder/list/{folder_id}}", hasBody = true)
-    fun deleteFolder(@Path("id") id: String)
+    fun deleteFolder(@Path("folder_id") id: Int): NullPointerException
 
     //퀴즈생성
     @POST("/folder/problem/")
@@ -40,7 +41,7 @@ interface SmuOdabInterface {
     //퀴즈삭제
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "{/folder/problem/{quiz_id}}", hasBody = true)
-    fun deleteQuiz(@Path("quiz_id") id: String)
+    fun deleteQuiz(@Path("quiz_id") id: Int)
 
     //퀴즈 리스트조회
     @GET("/folder/detail_quiz")
@@ -73,7 +74,7 @@ interface SmuOdabInterface {
     //오답노트삭제
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "{/folder/wrong/{wrong_id}}", hasBody = true)
-    fun deleteWrong(@Path("wrong_id") id: String)
+    fun deleteWrong(@Path("wrong_id") id: Int)
 
 
 }

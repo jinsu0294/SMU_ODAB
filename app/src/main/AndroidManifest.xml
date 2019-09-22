@@ -33,6 +33,7 @@
         <activity android:name=".PictureChoiceActivity"></activity>
         <activity android:name=".QuizFolderActivity"></activity>
         <activity android:name=".QuizAdd"></activity>
+        <activity android:name=".DeleteChoiceAcivity"></activity>
         <activity android:name=".QuizDetail"></activity> <!-- 스플래쉬 -->
         <activity android:name=".SplashActivity">
             <intent-filter>
