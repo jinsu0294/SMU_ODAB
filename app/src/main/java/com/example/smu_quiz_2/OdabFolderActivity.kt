@@ -42,6 +42,7 @@ class OdabFolderActivity : AppCompatActivity() {
                 for (i in 0 until list.size)
                     wrongList.add(WrongList(list[i].wrong_id, list[i].title, Management_id))
 
+                Log.e("OdabFolderList",list.toString())
                 tvNothing.visibility = if(list.isEmpty()) View.VISIBLE else View.GONE
                 rvFolderRecyclerview.visibility = if(list.isEmpty()) View.INVISIBLE else View.VISIBLE
 

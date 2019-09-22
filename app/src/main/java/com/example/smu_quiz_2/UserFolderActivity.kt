@@ -65,7 +65,7 @@ class UserFolderActivity : AppCompatActivity() {
                         androidx.recyclerview.widget.LinearLayoutManager(this)
                     Log.e("folderListSize", folderList.size.toString())
                 }, { error ->
-                    Log.e("123123", "false")
+                    Log.e("UserFolderActivity", "false")
                     error.printStackTrace()
                 }, {
                     Log.e("getFolder: ", "complete")

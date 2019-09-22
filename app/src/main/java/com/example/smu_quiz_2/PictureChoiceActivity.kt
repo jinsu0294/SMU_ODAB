@@ -5,14 +5,22 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.activity_odab_add.*
 import kotlinx.android.synthetic.main.activity_picture_choice.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -32,6 +40,8 @@ class PictureChoiceActivity: AppCompatActivity(){
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE)
         startActivityForResult(intent, PICK_FROM_ALBUM)
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

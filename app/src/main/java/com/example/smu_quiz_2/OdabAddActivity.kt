@@ -26,6 +26,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class OdabAddActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -33,18 +35,20 @@ class OdabAddActivity : AppCompatActivity() {
     var smuInfoRetrofit = smuOdabAPI.smuInfoRetrofit()
     var smuOdabInterface = smuInfoRetrofit.create(SmuOdabInterface::class.java)
 
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_odab_add)
 
         val Management_id = intent.getIntExtra("Management_id", 0)
-        Log.e("Odab add FolderId", Management_id.toString())
+        Log.e("OdabFolderId", Management_id.toString())
 
         val user = application as User
         // 사용자 이메일 받아오기
         auth = FirebaseAuth.getInstance()
         val email = auth.currentUser!!.email.toString()
+        Log.e("email", email)
 
         // 저장 버튼 리스너
         btnSave.setOnClickListener {
@@ -54,12 +58,14 @@ class OdabAddActivity : AppCompatActivity() {
             } else {  // 입력값이 모두 있는 경우
                 Toast.makeText(this,"잠시만 기다려 주세요. ",Toast.LENGTH_LONG).show()
                 val title = etUserOdabTitle.text.toString()
+                Log.e("title", title)
                 val text = etUserOdabTextContents.text.toString()
+                Log.e("text", text)
 
-               // val file = user.photoFile
+                // 파이어베이스에 사진 업로드
+                var imageUrl:String? = null
                 val imagefile = user.photoFile
                 val file = Uri.fromFile(imagefile)
-                var imageUri :String =""
                 val storage = FirebaseStorage.getInstance()
                 val storageRef = storage.reference
                 val OdabRef = storageRef.child("${file.lastPathSegment}")
@@ -76,39 +82,68 @@ class OdabAddActivity : AppCompatActivity() {
 
                 //업로드 성공
                 uploadTask.addOnSuccessListener {
-                    Toast.makeText(this,"오답을 성공적으로 추가하였습니다. ",Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(this, OdabFolderActivity::class.java)
-//                    intent.putExtra("Management_id", Management_id)
-//                    startActivity(intent)
-//                    finish()
-                }
+                    Toast.makeText(this,"사진이 성공적으로 선택되었습니다. ",Toast.LENGTH_SHORT).show()
 
-                // URL 받기
-                val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                    if (!task.isSuccessful) {
-                        task.exception?.let {
-                            throw it
+                    // URL 받기
+                    val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
+                            }
+                        }
+                        return@Continuation OdabRef.downloadUrl
+                    }).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val downloadUri = task.result
+                            if(downloadUri != null){
+
+                                imageUrl = downloadUri.toString()   // 이게 보낼 URL 스트링값
+                                Log.e("downloadUri", imageUrl)
+
+                                val wrong = CreateWrong(
+                                    email,
+                                    imageUrl!!,
+                                    title,
+                                    text,
+                                    Management_id
+                                )
+                                Log.e("make_wrong_list", wrong.toString())
+
+                                // TODO:: OK 오답노트생성 createWrong()
+                                if(wrong.image != null){
+                                    Log.e("Wrong.ImageURL", wrong.image)
+                                    smuOdabInterface.createWrong(wrong)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe({ result ->
+                                            Log.e("create Odab", result.toString())
+
+                                            val intent = Intent(this, OdabFolderActivity::class.java)
+                                            intent.putExtra("Management_id", Management_id)
+                                            startActivity(intent)
+                                            setResult(Activity.RESULT_OK)
+                                            Log.e("Odab Add finish", "yes")
+                                            finish()
+                                        }, { error ->
+                                            error.printStackTrace()
+                                            Log.e("creat Odab", "**error**")
+                                        }, {
+                                        })
+
+                                }
+                            }
+                        } else {
+                            Log.e("Uri load","******")
                         }
                     }
-                    return@Continuation OdabRef.downloadUrl
-                }).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val downloadUri = task.result
-                        Log.e("downloadUri", downloadUri.toString())
-                        imageUri = downloadUri.toString()   // 이게 보낼 URL 스트링값
-                    } else {
-                        Log.e("Uri load","******")
-                    }
+
                 }
-                val wrong = CreateWrong(
-                    email,
-                    imageUri,
-                    title,
-                    text,
-                    Management_id
-                )
-                Log.e("create Odab", wrong.toString())
-//
+
+
+
+
+
+
 //                // TODO:: OK 오답노트생성 createWrong()
 //                smuOdabInterface.createWrong(wrong)
 //                    .subscribeOn(Schedulers.io())
@@ -121,12 +156,12 @@ class OdabAddActivity : AppCompatActivity() {
 //                    }, {
 //                    })
 //
-                val intent = Intent(this, OdabFolderActivity::class.java)
-                intent.putExtra("Management_id", Management_id)
-                startActivity(intent)
-                setResult(Activity.RESULT_OK)
-                Log.e("Folder Add finish", "yes")
-                finish()
+//                val intent = Intent(this, OdabFolderActivity::class.java)
+//                intent.putExtra("Management_id", Management_id)
+//                startActivity(intent)
+//                setResult(Activity.RESULT_OK)
+//                Log.e("Folder Add finish", "yes")
+//                finish()
             }
 
         }
