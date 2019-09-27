@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:712593491412:android:58b62ef1311bf17c",
+        "mobilesdk_app_id": "1:712593491412:android:c5b66afd3d2fe32b308241",
         "android_client_info": {
-          "package_name": "com.example.smu_quiz_2"
+          "package_name": "com.smu_odab.smu_quiz_2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "712593491412-noodmbmqkl4834b29ig1rutejn69c14v.apps.googleusercontent.com",
+          "client_id": "712593491412-rf47f4ij2sgcagll5dm5tdhvv91hum4c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.smu_quiz_2",
+            "package_name": "com.smu_odab.smu_quiz_2",
             "certificate_hash": "3121c5f7e726162e6f46297a478bb377da9c5b5f"
           }
         },
