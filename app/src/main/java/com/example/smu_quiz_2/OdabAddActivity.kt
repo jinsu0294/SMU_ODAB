@@ -53,7 +53,7 @@ class OdabAddActivity : AppCompatActivity() {
         // 저장 버튼 리스너
         btnSave.setOnClickListener {
             // 입력값이 없는 경우
-            if (etUserOdabTitle.text.isEmpty() || etUserOdabTextContents.text.isEmpty() || user.photo == null) {
+            if (etUserOdabTitle.text.isEmpty() || etUserOdabTextContents.text.isEmpty() || user.photoFile == null) {
                 Toast.makeText(this, getString(R.string.nothing), Toast.LENGTH_SHORT).show()
             } else {  // 입력값이 모두 있는 경우
                 Toast.makeText(this,"잠시만 기다려 주세요. ",Toast.LENGTH_LONG).show()

@@ -30,18 +30,18 @@ interface SmuOdabInterface {
 
 
     //폴더삭제
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "{/folder/list/{folder_id}}", hasBody = true)
-    fun deleteFolder(@Path("folder_id") id: Int): NullPointerException
+//    @FormUrlEncoded
+//    @HTTP(method = "DELETE", path = "{/folder/list/{folder_id}}", hasBody = true)
+//    fun deleteFolder(@Path("folder_id") id: Int): NullPointerException
 
     //퀴즈생성
     @POST("/folder/problem/")
     fun createQuiz(@Body value: CreateQuiz): Observable<CreateQuiz>
 
-    //퀴즈삭제
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "{/folder/problem/{quiz_id}}", hasBody = true)
-    fun deleteQuiz(@Path("quiz_id") id: Int)
+//    //퀴즈삭제
+//    @FormUrlEncoded
+//    @HTTP(method = "DELETE", path = "{/folder/problem/{quiz_id}}", hasBody = true)
+//    fun deleteQuiz(@Path("quiz_id") id: Int)
 
     //퀴즈 리스트조회
     @GET("/folder/detail_quiz")
@@ -71,10 +71,10 @@ interface SmuOdabInterface {
     fun getWrongDetail(@Path("wrong_id") wrong_id:Int): Observable<Wrong>
 
     //오답노트수정 x
-    //오답노트삭제
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "{/folder/wrong/{wrong_id}}", hasBody = true)
-    fun deleteWrong(@Path("wrong_id") id: Int)
+//    //오답노트삭제
+//    @FormUrlEncoded
+//    @HTTP(method = "DELETE", path = "{/folder/wrong/{wrong_id}}", hasBody = true)
+//    fun deleteWrong(@Path("wrong_id") id: Int)
 
 
 }
